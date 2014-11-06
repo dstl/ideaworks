@@ -1,5 +1,4 @@
 (c) Crown Copyright 2011 Defence Science and Technology Laboratory UK
-Author: Rich Brantingham
 
 # Ideaworks
 
