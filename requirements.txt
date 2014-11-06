@@ -1,0 +1,55 @@
+# (c) Crown Copyright 2011 Defence Science and Technology Laboratory UK
+# Author: Rich Brantingham
+
+# (c) Crown Copyright 2014 Defence Science and Technology Laboratory UK 
+# Author: Rich Brantingham
+
+# Basic requirements
+docutils==0.11
+biplist==0.6
+defusedxml==0.4.1
+Django==1.5.1
+six==1.5.2
+wsgiref==0.1.2
+python-dateutil==2.2
+
+# For py3 support - tests will error without this
+# https://github.com/MongoEngine/mongoengine/issues/209
+nose==1.3.0
+
+
+# For the API
+#django-tastypie
+PyYAML==3.10
+lxml==3.3.2
+python-mimeparse==0.1.4
+
+
+# Getting it direct from source because the pypi version isn't as current and has some issues.
+#git+https://github.com/toastdriven/django-tastypie.git
+
+# Mongo specific
+pymongo==2.6.3
+mongoengine==0.8.7
+django-tastypie-mongoengine==0.4.5
+
+
+# Authentication
+django-profiles==0.2
+django-registration==1.0
+django-registration-email==0.7.1
+
+# For testing only
+requests==2.2.1
+
+# For generating docs
+# git+git://github.com/juanique/django-tastytools.git#egg=django_tastytools-dev
+# The following was useful: https://tastytools.readthedocs.org/en/latest/tutorial.html#installation
+	
+#/////////////////////////////////////////////////////////////////////////////////////////////////////
+#
+# Using a 2 stage approach - download and then install - useful for offline
+# pip install --download <DIR> -r requirements.txt
+# pip install --no-index --find-links=[file://]<DIR> -r requirements.txt
+#
+#/////////////////////////////////////////////////////////////////////////////////////////////////////

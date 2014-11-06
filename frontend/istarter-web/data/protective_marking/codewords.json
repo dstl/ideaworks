@@ -1,0 +1,44 @@
+[{
+    "codeword" : "BANANA1",
+    "abbreviation" : "B1",
+    "comment" : "information about bananas",
+    "source" : "",
+    "national_authority" : "UK",
+    "active" : true
+  }, {
+    "codeword" : "BANANA2",
+    "abbreviation" : "B3",
+    "comment" : "sensitive information about bananas",
+    "source" : "",
+    "national_authority" : "UK",
+    "active" : true
+  }, {
+    "codeword" : "APPLE",
+    "abbreviation" : "A1",
+    "comment" : "information about apples",
+    "source" : "",
+    "national_authority" : "UK",
+    "active" : true
+  },{
+    "codeword" : "APPLE2",
+    "abbreviation" : "A2",
+    "comment" : "information about apples",
+    "source" : "",
+    "national_authority" : "UK",
+    "active" : true
+  }, {
+    "codeword" : "PEAR",
+    "abbreviation" : "P1",
+    "comment" : "information about pears",
+    "source" : "",
+    "national_authority" : "UK",
+    "active" : true
+  }, {
+    "codeword" : "ORANGE",
+    "abbreviation" : "O1",
+    "comment" : "information about oranges",
+    "source" : "",
+    "national_authority" : "UK",
+    "active" : true
+  }
+]

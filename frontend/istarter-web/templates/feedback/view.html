@@ -1,0 +1,56 @@
+<div class="nav-classification"><max-protective-marking></max-protective-marking></div>
+<div class="row">
+  
+  <!--Sidebar content-->
+  <div class="span3">
+    <ng-include src="'templates/feedback/view-sidebar.html'"></ng-include>  
+  </div><!-- END Sidebar content -->
+  
+  <!-- main view area -->
+  <div class="span9 view-area">
+    <div class="well well-small view-name"><h5>Viewing - Feedback </</h5></div>
+
+<div style="tabs">
+  <ul class="nav nav-tabs" >
+    <li ng-class="{active: viewName =='view-all'}"><a ng-href="#/feedback/view-all/?limit=0"> All feedback </a></li>
+    <li ng-class="{active: viewName =='view-my'}" ng-show="user.name() !== 'Anonymous'"><a ng-href="#/feedback/view-my/?user={{user.id()}}&status=all&public=all&limit=0"> My feedback </a></li>
+    <li ng-class="{active: viewName =='view-private'}" ng-show="user.isAdmin"><a ng-href="#/feedback/view-private/?public=false&limit=0"> Private feedback </a></li>
+  </ul>
+</div>
+
+    <div class="view-body">
+    <!-- Repeated per feedback : grid-box feedback -->
+    <div class="summary-box clearfix" ng-repeat="feedback in siteFeedback | filter:filterOptions.filterText | orderBy:orderProp" view-loading>
+      <div class="well  inner-summary-box clearfix">
+        <small>
+        <!-- feedback title -->
+            <div class="feedback-title">
+              <h5 class="clickable" ng-class="{'draft' : feedback.status === 'draft', 'deleted' : feedback.status === 'deleted', 'hidden-feedback' : feedback.status === 'hidden'}">
+                <a ng-href="" title="Click to open: {{feedback.title}}" ng-click="openFeedback(feedback.id)" >
+                  <span ng-show="feedback.status === 'draft'">DRAFT : </span>
+                  <span ng-show="feedback.status === 'deleted'">DELETED : </span> 
+                  <span ng-show="feedback.status === 'hidden'">HIDDEN : </span> 
+                  {{feedback.title}}
+                </a>
+              </h5>
+            </div>
+
+            <!-- protective marking -->
+            <div class="prot-marking">
+              <protective-marking type="full"></protective-marking>
+            </div>
+            
+            <!-- time created -->
+            <div>
+            <span class="contributor">{{feedback.contributor_name}}</span>
+            <span class="contributor-time" popover="Feedback created by {{feedback.contributor_name}} at {{feedback.created | date: 'HH:mm' }} on {{feedback.created | date: 'dd/MM/yyyy' }}" popover-trigger="mouseenter">{{feedback.informal_created}}</span>
+            </div>
+            <!-- description -->
+            <div class="feedback-summary">{{feedback.summary}}</div>
+          </small>
+      </div>
+      
+    </div>
+    </div>
+  </div>
+</div>

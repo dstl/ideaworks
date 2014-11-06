@@ -1,0 +1,70 @@
+<!-- (c) Crown Copyright 2014 Defence Science and Technology Laboratory UK 
+# Author: Rich Brantingham  -->
+
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title_extra %} Login {% endblock %} 
+
+{% block main_block %}
+
+  <div class="form-container">
+
+    <form id="login" class="form-auth" action="{% url "auth_login" %}" method="POST">{% csrf_token %}
+      <h2 class="form-auth-heading">Please sign in</h2>
+
+      {% if form.errors %}
+      <p class="text-error">Username or password incorrect</p>
+      <p class="text-error">Please try again.</p>
+      {% endif %}
+
+          {% autoescape off %}
+            {{ form.username.errors }}
+             {% endautoescape %}
+          <!-- <b>{{ form.username.label }}:</b>  -->
+          <label>{{ form.username.label }}:</label>
+          {{ form.username }}
+
+          {% autoescape off %}      
+            {{ form.password.errors }}
+            {% endautoescape %}
+          <!-- <b>{{ form.password.label }}:</b>  -->
+          <label>{{ form.password.label }}:</label>
+          {{ form.password }}
+      
+      <div class="row-fluid">
+        <div class="span6">
+          <label class="checkbox">
+            {{ form.remember_me }}
+            {{ form.remember_me.label }}
+          </label>
+        </div>
+        </div>
+       <div style="clear:both">
+      	<a class="collapsible dialog-opener" href="#need_an_account" id="a_need_an_account">Need an account?</a>
+      </div>
+      <div id="need_an_account" class="collapsed dialog-message" title="Need an account?">
+       {% include "registration/need_an_account.html" with site_name=site_name %}
+      </div>
+      <div>
+        <a class="collapsible dialog-opener" href="#prototypes" id="a_prototypes">Prototypes & Description of Service.</a>
+      </div>
+      <div id="prototypes" class="collapsed dialog-message" title="Prototypes & Description of Service.">
+        {% include "registration/prototype_snippet.html" with site_name=site_name %}
+      </div>
+	  <a href="{% url "auth_password_reset" %}" id="forgot_password">Forgotten your password?</a>
+      <br/>
+      <div class="row-fluid">
+        <div class="span5"><button class="btn" type="submit">Sign in</button></div>
+      </div>
+      <!-- Passes next variable to follow on view calls including login POST -->
+      <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+  </div> <!-- /container -->
+  
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static "auth_addin_app/js/authForm.js" %}" type="text/javascript"></script>
+{% endblock %}

@@ -1,0 +1,107 @@
+<div class="container">
+  <form name="feedbackForm" ng-submit="submitFeedback(feedbackForm.$valid, 'published')" novalidate>
+    <!-- novalidate prevents any HTML5 validation -->
+    <div class="row">
+      <div class="span12">
+        <div class="well">
+          <h4 ng-show="mode === 'create'"><i class="icon-large icon-pencil"></i> Add new feedback </h4>
+          <h4 ng-show="mode === 'edit' && feedback.status === 'draft'" class="draft"><i class="icon icon-pencil"></i> <span>DRAFT : </span> Edit feedback</h4>
+          <h4 ng-show="mode === 'edit' && feedback.status !== 'draft'"><i class="icon icon-pencil"></i> Edit feedback</h4>
+          <div class="status form-inline" ng-class="{'new-unsaved' : feedback.status === 'new unsaved','draft' : feedback.status === 'draft','deleted' : feedback.status === 'deleted', 'hidden-doc' : feedback.status === 'hidden'}"><label>Status </label>&nbsp;&nbsp;<span><small> {{feedback.status | uppercase}}</small></span></div>
+          
+          <div class="form-inline chkbox"><input type="checkbox" ng-model="feedback.public" id="feedbackPublic" ng-checked="true"> <label for="feedbackPublic"> Public feedback <span class="muted">(everyone can read this, not just the system owners)</span></label> </br> </div>
+       
+          <div class="form-group" ng-class="{'text-error':feedbackForm.title.$invalid && feedback.submitted}">
+            <label>Feedback title</label>
+            <div ng-show="feedbackForm.title.$invalid && feedback.submitted" class="error-message">Please enter a title for your feedback</div>
+            <input class="form-control input-xlarge" name="title" ng-model="feedback.title" placeholder="Give a brief feedback title" required type="text" maxlength=70>
+          </div>
+          
+          <div class="form-group" ng-class="{'text-error':feedbackForm.summary.$invalid && feedback.submitted}">
+            <label>Feedback summary</label>
+            <div ng-show="feedbackForm.summary.$invalid && feedback.submitted" class="error-message">Please enter a brief summary for your feedback</div>
+            <input class="input-block-level form-control" name="summary" ng-model="feedback.summary" placeholder="Give a brief feedback summary" required type="text" maxlength=140>  
+          </div>
+          
+          <div class="form-group description" ng-class="{'text-error':feedbackForm.body.$invalid && feedback.submitted}">
+            <label>Feedback body</label>
+            <div ng-show="feedbackForm.body.$invalid && feedback.submitted" class="error-message">Please enter some feedback</div>
+            <div text-angular name="body" ng-model="feedback.body" ng-required=true></div>
+          </div>
+
+        </div>
+        
+          <div class="well">        
+          <div class="form-group" ng-class="{'text-error':feedbackForm.classification.$invalid && feedback.submitted}">
+
+            <label>Protective marking &nbsp;&nbsp;<protective-marking type="full"></protective-marking></label>
+            
+            <div ng-show="feedbackForm.classification.$invalid && feedback.submitted" class="error-message">Please select a classification</div>
+            <select class="form-control classification-select" name="classification" ng-model="selectClassification" ng-options="x.value as x.text for x in pm.classifications.list" ng-change="updatePM()" required>
+              <option value="">-- Select a classification --</option>
+            </select>
+            <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#pm-options">
+              <small>
+                <span class="closed">show more options <i class="icon-chevron-down"></i></span>
+                <span class="opened">&nbsp;show less options <i class="icon-chevron-up"></i></span>
+              </small>
+            </button>
+
+          </div>
+
+          <div id="pm-options" class="collapse">
+
+          <div class="sidebyside">
+            <label>Codewords <small class="muted">(hold CTRL to select multiple)</small></label>
+            <select class="form-control codewords-select" name="codewords" ng-model="feedback.protective_marking.codewords" ng-options="x for x in pm.codewords.list" ng-change="updatePM()" multiple>
+              <option value="">None</option>
+            </select>
+          </div>  
+          <div class="sidebyside">
+            <label>Descriptor</label>
+            <select class="form-control" name="descriptor" ng-model="feedback.protective_marking.descriptor" ng-options="x for x in pm.descriptors.list" ng-change="updatePM()">
+              <option value="">Nothing selected</option>
+            </select>
+         </div>
+         <div class="sidebyside">
+            <label>National Caveats</label>
+            <div class="form-group">
+              <select class="form-control" name="national_caveats" ng-model="feedback.protective_marking.national_caveats_primary_name" ng-options="x for x in pm.national_caveats.list" ng-change="updatePM()">
+                <option value="">Nothing selected</option>
+              </select>
+            </div>
+          </div>
+
+          </div>
+          </div>
+  
+        <div class="form-buttons">
+
+          <span >
+            <button class="btn btn-small btn-warning push-right" type="button" ng-click="submitFeedback(feedbackForm.$valid, 'draft')" ng-disabled="feedbackForm.$invalid && feedback.submitted" ng-show="mode === 'create' && (feedback.status === 'draft' || feedback.status === 'new unsaved')"><i class="icon-file icon-white"></i> Save as draft </button>
+            <button class="btn btn-small btn-success push-right" type="submit" ng-disabled="feedbackForm.$invalid && feedback.submitted" ng-show="mode === 'create' && (feedback.status === 'draft' || feedback.status === 'new unsaved')"><i class="icon-ok icon-white"></i> Submit </button>
+                      
+            <button class="btn btn-small btn-warning push-right" type="button" ng-click="saveFeedback(feedbackForm.$valid, 'draft')" ng-disabled="feedbackForm.$invalid && feedback.submitted" ng-show="mode === 'edit' && feedback.status === 'draft'"><i class="icon-file icon-white"></i> Save as draft</button>
+            <button class="btn btn-small btn-success push-right" type="button" ng-click="saveFeedback(feedbackForm.$valid, 'published')" ng-disabled="feedbackForm.$invalid && feedback.submitted" ng-show="mode === 'edit' && feedback.status === 'draft'"><i class="icon-ok icon-white"></i> Submit </button>
+            <button class="btn btn-small btn-info push-right" type="button" ng-click="saveFeedback(feedbackForm.$valid, 'published')" ng-disabled="feedbackForm.$invalid && feedback.submitted" ng-show="mode === 'edit' && feedback.status === 'published'"><i class="icon-ok icon-white"></i> Submit changes </button>
+          </span>
+          <button class="btn btn-small btn-primary push-right" type="button" ng-click="cancelFeedback()"><i class="icon-remove icon-white"></i> Cancel </button>
+        </div>
+      </div>
+      <div class="dev-comment">{{feedback}}</div>
+
+      </div>
+      
+    </div>
+  </form>
+</div>
+
+  <div class="popup-alert invalid-feedbacktype alert alert-danger">
+    <button class="btn btn-danger btn-close btn-mini pull-right" ng-click="closePopupAlert();;openPreviousViewUrl()" title="Cancel" type="button">
+      <i class="icon-remove icon-white"></i>
+    </button>
+    <h4><i class="icon icon-trash"></i> Invalid Feedback Type</h4>
+    <br />
+    <p>Invalid feedback type specified. Can not create feedback.</p><br />
+    <button class="btn btn-danger pull-right" ng-click="closePopupAlert();openPreviousViewUrl()" title="Cancel" >  Ok  </button>
+  </div>

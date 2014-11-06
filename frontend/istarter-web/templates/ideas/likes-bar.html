@@ -1,0 +1,8 @@
+<div class="clearfix">
+    <div class="progress ratings-bar">
+      <div class="bar bar-success" ng-style="{ 'width':idea.like_percent +'%' }" title="{{idea.like_percent}}% like this idea"></div>
+      <div class="bar bar-danger" ng-style="{ 'width':idea.dislike_percent +'%' }" title="{{idea.dislike_percent}}% don't like this idea"></div>
+    </div>
+    <div class="pull-left like-info"><i class="icon-thumbs-up"></i><span class="like-count"> {{idea.like_count}}</span><span class="like-text"> Like</span></div>
+    <div class="pull-right like-info"><i class="icon-thumbs-down"></i><span class="like-count" title="vote score: {{idea.vote_score}}"> {{idea.dislike_count}}</span><span class="like-text"> Don't Like</span></div>
+</div>

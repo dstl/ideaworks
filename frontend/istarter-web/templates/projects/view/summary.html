@@ -1,0 +1,70 @@
+<div class="nav-classification"><max-protective-marking></max-protective-marking></div>
+<div class="row">
+
+  <!--Sidebar content-->
+  <div class="span3">
+    <ng-include src="'templates/projects/view/sidebar.html'"></ng-include>  
+  </div><!-- END Sidebar content -->
+  
+  <!-- main view area -->
+  <div class="span9 view-area">
+    
+    <ng-include src="'templates/projects/view/switch-layout.html'"></ng-include>
+    <div class="view-body">
+    <!-- Repeated per project : grid-box content -->
+    <div class="summary-box clearfix" ng-repeat="project in projects | filter:filterOptions.filterText | orderBy:orderProp" view-loading>
+      <div class="well well-small inner-summary-box clearfix" ng-class="{'author-highlight':user.name() === project.contributor_name}">
+      <small>
+        <div class="span6">
+         
+            <!-- project title -->
+            <div class="project-title">
+              <h5 class="clickable" ng-class="{'draft' : project.status === 'draft', 'deleted' : project.status === 'deleted', 'hidden-doc' : project.status === 'hidden'}">
+                <a ng-href="" title="Click to open: {{project.title}}" ng-click="openProject(project.id)" >
+                  <span ng-show="project.status === 'draft'">DRAFT : </span>
+                  <span ng-show="project.status === 'deleted'">DELETED : </span> 
+                  <span ng-show="project.status === 'hidden'">HIDDEN : </span> 
+                  {{project.title | truncate: 50 }}
+                </a>
+              </h5>
+            </div>
+            
+            <!-- protective marking -->
+            <div class="prot-marking">
+              <protective-marking type="full"></protective-marking>
+            </div>
+            
+            <!-- time created -->
+            <span class="contributor">{{project.contributor_name}}</span>
+            <span class="contributor-time" popover="Project submitted by {{project.contributor_name}} at {{project.created | date: 'HH:mm' }} on {{project.created | date: 'dd/MM/yyyy' }}" popover-trigger="mouseenter">{{project.informal_created}}</span>
+            
+            <!-- description -->
+            <div class="project-description">{{project.description_snippet}}</div>
+           
+            <!-- tags -->
+            <div class="tags">
+              <view-project-tags></view-project-tags>
+            </div>
+        
+        </div>
+        
+        <div class="view-ratings-bar span3" ng-show="project.status==='published'">
+          <!-- backing count -->  
+          <div><i class="icon-hand-up icon"></i> <ng-pluralize count="project.back_count" when="{'0' : 'No backers', '1' : '1 backer', 'other' : '{} backers'}"></ng-pluralize></div>
+        
+          <!-- comment count -->
+          <div class="comment-count pull-left" ng-show="project.status==='published'">
+            <a class="btn btn-mini btn-inverse clickable" ng-class="{'disabled':user.name() === 'Anonymous'}" ng-click="comment.add(project.id, 'comment', pm, user, 'project')" ng-href="" popover-trigger="mouseenter" popover-title="{{project.comment_count}} comments" popover="Click to add your comment on this project">
+              <i class="icon-comment icon-white"></i> {{project.comment_count}}
+            </a>
+          </div>
+</div>
+        </div>
+        
+        </small>
+      </div>
+      
+    </div>
+    </div>
+  </div>
+</div>

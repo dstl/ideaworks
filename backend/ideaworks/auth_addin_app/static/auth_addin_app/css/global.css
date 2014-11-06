@@ -1,0 +1,193 @@
+/************ Global css ***********
+	Global styles for Auth API forms
+************************************/
+body {
+	font-family: "Helvetica Neue", Helvetica,Arial, sans-serif;
+	font-size: 12px;
+	background-color: #f5f5f5;
+	color: #333;
+	margin: 0px;
+	padding: 0px;
+	min-width:360px;		/* Minimum width of layout - does not work in IE 6 */
+}
+
+.form-container {
+	margin:0;
+	padding:0;
+	text-align:center;
+}
+
+.form-auth {
+	text-align:left;
+	width: 300px;
+	background-color: #FFFFFF;
+	border: 1px solid #E5E5E5;
+	border-radius: 5px 5px 5px 5px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+	margin: 40px auto 20px;
+	max-width: 300px;
+	padding: 9px 29px 29px;
+}
+
+.form-auth  h2 {
+	font-size:31.5px;
+	line-height:40px;
+	margin:19px 0 10px 0;
+}
+
+.form-auth input[type="text"], .form-auth input[type="password"] {
+	font-size: 12px;
+	height: auto;
+	margin:3px 0 12px 0;
+	padding: 4px 6px;
+	background-color: #FFFFFF;
+	border: 1px solid #CCCCCC;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+	border-radius: 4px 4px 4px 4px;
+	color: #555555;
+	display: inline-block;
+	line-height: 20px;
+	vertical-align: middle;
+	width:92%;
+}
+
+.form-error {
+color:#ff0000;
+margin:0;
+padding:0;
+}
+
+.form-auth input[type="text"]:focus, .form-auth input[type="password"]:focus {
+	border-color: rgba(82, 168, 236, 0.8);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(82, 168, 236, 0.6);
+	outline: 0 none;
+}
+ .form-auth label {
+ /* display:none;*/
+ float:left;
+
+ }
+ 
+.form-auth label.checkbox {
+ display:block;
+ margin:5px 0;
+ }
+.lt-ie9 .form-auth label {
+display:inline;
+width:95%;
+margin:9px 0 2px 0;
+}
+.lt-ie7 .form-auth input {
+width:95%;
+}
+
+.form-auth .collapsed {
+display:none;
+}
+.form-auth .expanded {
+display:inline;
+}
+
+.btn {
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-bottom-colors: none;
+	-moz-border-top-colors: none;
+	background-color: #efefef;
+	background-image: linear-gradient(to bottom, #FFFFFF, #E5E5E5);
+	background-repeat: repeat-x;
+	border-color: #ccc;
+	border-image: none;
+	border-radius: 4px 4px 4px 4px;
+	border-style: solid;
+	border-width: 1px;
+	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+	color: #333333;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 12px;
+	line-height: 20px;
+	margin-bottom: 18px;
+	padding: 5px 12px;
+	*padding: 2px 12px;
+	text-align: center;
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+	vertical-align: middle;
+}
+
+.btn:hover {
+	background-color: #e6e6e6;
+	background-image: linear-gradient(to bottom, #F5F5F5, #e5e5e5);
+	background-repeat: repeat-x;
+}
+
+.form-auth .btn {
+display:block;
+margin:20px 0 0 0;
+}
+
+.lt-ie7 .form-auth .checkbox input {
+width:auto !important;
+}
+
+.dialog-opener {
+ color: #0088cc;
+ text-decoration:none;
+}
+
+.dialog-opener:hover {
+ color: #005580;
+ text-decoration:underline;
+}
+
+/* force jquery-ui widgets to inherit global font style */
+.ui-widget {
+    font-family: inherit !important;
+    font-size: inherit !important;
+}
+
+.ui-dialog {
+	box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.15);
+}
+
+.errorlist, .text-error {
+color:#b94a48;
+}
+
+p.errorlist {
+display:none;
+}
+
+.errorlist {
+margin:0px;
+
+}
+
+
+.errorlist li {
+list-style:none;
+float:right;
+margin-right:10px;
+position:relative;
+}
+
+.text-error .errorlist {
+margin:0px;
+padding:0;
+}
+
+.has-error {
+color: #b94a48 !important;
+border-color: #b94a48 !important;
+-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+ }
+input.has-error:focus {
+  border-color: #953b39 !important;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392 !important;
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392 !important;
+}
+
+.lt-ie7  input {
+margin-bottom:10px;
+}

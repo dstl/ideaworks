@@ -1,0 +1,91 @@
+<!-- (c) Crown Copyright 2014 Defence Science and Technology Laboratory UK 
+# Author: Rich Brantingham  -->
+
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title_extra %} Sign up {% endblock %} 
+
+{% block extra_styles %}
+
+{% endblock %}
+
+{% block main_block %}
+
+<div class="form-container">
+  <form id="registration" class="form-auth" action="" method="POST">{% csrf_token %}
+    <h2 class="form-auth-heading">Sign up</h2>
+
+      {% if form.errors %}
+        <p class="errorlist">Please take a look at the errors and try again.</p>
+      {% endif %}
+        
+      {% autoescape off %}
+      {{ form.email.errors }}
+      {% endautoescape %}
+      <label>{{ form.email.label }}</label>
+      {{ form.email }}
+
+      {% autoescape off %}
+          {{ form.password1.errors }}
+      {% endautoescape %}
+      <label>{{ form.password1.label }}</label>
+      {{ form.password1 }}
+
+      {% autoescape off %}
+          {{ form.password2.errors }}
+      {% endautoescape %}
+      <label>{{ form.password2.label }}</label>
+        {{ form.password2 }}
+
+	  {% autoescape off %}
+      {{ form.first_name.errors }}
+      {% endautoescape %}
+      <label>{{ form.first_name.label }}</label>
+      {{ form.first_name }}
+
+	  {% autoescape off %}
+      {{ form.last_name.errors }}
+      {% endautoescape %}
+      <label>{{ form.last_name.label }}</label>
+      {{ form.last_name }}
+
+      {% autoescape off %}
+      {{ form.organisation.errors }}
+      {% endautoescape %}
+      <label>{{ form.organisation.label }}</label>
+      {{ form.organisation }}
+
+      {% autoescape off %}
+      {{ form.team.errors }}
+      {% endautoescape %}
+      <label>{{ form.team.label }}</label>
+      {{ form.team }}
+
+      <div>
+		{% autoescape off %}
+		    {{ form.tos.errors }}
+		{% endautoescape %}
+        
+        <label class="checkbox">
+        {{ form.tos }}
+        {{ form.tos.label }}
+        <p><a class="collapsible dialog-opener" href="#descriptionOfService" id="a_descriptionOfService"> Description of Service.</a></p>
+        </label>
+      </div>
+      
+      <div id="descriptionOfService" class="collapsed dialog-message" title="Description of Service.">
+        {% include "registration/description_snippet.html" %}
+      </div>
+
+    <button class="btn" type="submit">Sign up</button>
+     <input type="hidden" name="next" value="{{ next }}" />
+  </form>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static "auth_addin_app/js/authForm.js" %}" type="text/javascript"></script>
+{% endblock %}

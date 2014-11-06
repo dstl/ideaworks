@@ -1,0 +1,78 @@
+<div class="nav-classification"><max-protective-marking></max-protective-marking></div>
+<div class="container">
+  <div class="row">
+  
+    <!-- left hand column  -->
+    <div class="span12">
+      <div class="well content-title">
+  
+        <!-- protective marking -->
+        <div class="prot-marking pull-right">
+          <protective-marking type="compact"></protective-marking>
+        </div>
+
+          <h1 ng-class="{'draft' : content.status === 'draft','deleted' : content.status === 'deleted', 'hidden-doc' : content.status === 'hidden'}">
+            <span ng-show="content.status === 'draft'">DRAFT : </span>
+            <span ng-show="content.status === 'deleted'">DELETED : </span>
+            <span ng-show="content.status === 'hidden'">HIDDEN : </span> {{content.title}}
+          </h1>
+          <!-- time created and contributor -->
+          <small>
+            <span class="contributor">{{content.contributor_name}}</span>
+            <span class="contributor-time" popover="Content submitted by {{content.contributor_name}} at {{content.created | date: 'HH:mm' }} on {{content.created | date: 'dd/MM/yyyy' }}" popover-trigger="mouseenter">{{content.informal_created}}</span>
+          </small>
+          <button class="btn btn-mini disabled pull-right" popover-trigger="mouseenter" popover="Share this content via email" ng-click="shareContentEmail(content)" ng-show="content.status==='published'"><i class="icon-envelope" ></i> share</button>
+         
+      </div>
+      <div class="well description">
+        <div class="pm-text">
+          <protective-marking type="text"></protective-marking>
+        </div>
+        <div ng-bind-html="content.body"></div>
+      </div>
+      <div class="form-buttons">
+        <span ng-show="user.isAuthor || user.isAdmin">
+          <button class="btn btn-small btn-info push-right" ng-click="editContent()" ng-show="content.status === 'published'"><i class="icon-pencil icon-white"></i> Edit </button>
+          <button class="btn btn-small btn-warning push-right" ng-click="editContent()" ng-show="content.status === 'draft'"><i class="icon-pencil icon-white"></i> Edit draft </button>
+          <button class="btn btn-small btn-warning push-right" ng-click="editContent()" ng-show="content.status === 'hidden'"><i class="icon-pencil icon-white"></i> Edit hidden </button>
+          <!-- <button class="btn btn-small btn-danger push-right" ng-click="confirmSoftDeleteContent()" ng-show="content.status !=='deleted'"><i class="icon-trash icon-white"></i> Delete </button> -->
+          <button class="btn btn-small btn-danger push-right" ng-click="confirmDeleteContent()" ng-show="user.isAdmin"><i class="icon-trash icon-white"></i> Delete Permanently </button>
+        </span>
+          <button class="btn btn-small btn-primary push-right" ng-click="closeContent()"><i class="icon-remove icon-white"></i> Close </button>
+        </div>
+    </div><!-- end left hand column -->
+    
+  </div><!-- end row -->
+</div>
+
+
+  <div class="popup-alert confirm-soft-delete-content alert alert-alert">
+    <button class="btn btn-danger btn-close btn-mini pull-right" ng-click="closePopupAlert()" title="Cancel" type="button">
+      <i class="icon-remove icon-white"></i>
+    </button>
+    <h4><i class="icon icon-trash"></i> Delete content?</h4>
+    <br />
+    <p>Are you sure you want to delete this content? </p><br />
+    <button class="btn btn-warning pull-left" ng-click="closePopupAlert();softDeleteContent()" title="Confirm delete">  Yes  </button>
+    <button class="btn btn-danger pull-right" ng-click="closePopupAlert()" title="Cancel" >  No  </button>
+  </div>
+
+  <div class="popup-alert confirm-delete-content alert alert-danger">
+    <button class="btn btn-danger btn-close btn-mini pull-right" ng-click="closePopupAlert()" title="Cancel" type="button">
+      <i class="icon-remove icon-white"></i>
+    </button>
+    <h4><i class="icon icon-trash"></i> Delete content?</h4>
+    <br />
+    <p>Are you sure you want to <strong>permanently delete</strong> this content? </p><br />
+    <button class="btn btn-warning pull-left" ng-click="closePopupAlert();deleteContent()" title="Confirm delete">  Yes  </button>
+    <button class="btn btn-danger pull-right" ng-click="closePopupAlert()" title="Cancel" >  No  </button>
+  </div>
+  
+  <div class="popup-alert content-deleted alert alert-info">
+    <button class="btn btn-danger btn-close btn-mini pull-right" ng-click="closePopupAlert();closeContent(true)" title="Cancel" type="button">
+      <i class="icon-remove icon-white"></i>
+    </button>
+    <h4><i class="icon icon-trash"></i> Content deleted.</h4>
+    <br />
+    <p>This content has now been deleted</p>
+  </div>

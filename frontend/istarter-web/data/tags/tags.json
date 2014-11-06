@@ -1,0 +1,91 @@
+{
+  "meta": {
+    "limit": 20, 
+    "next": "/api/v1/tag/?limit=20&offset=20", 
+    "offset": 0, 
+    "previous": null, 
+    "total_count": 234
+  }, 
+  "objects": [
+    {
+      "count": 4, 
+      "text": "steps"
+    }, 
+    {
+      "count": 3, 
+      "text": "acquittals"
+    }, 
+    {
+      "count": 3, 
+      "text": "shell"
+    }, 
+    {
+      "count": 3, 
+      "text": "pats"
+    }, 
+    {
+      "count": 3, 
+      "text": "democracy"
+    }, 
+    {
+      "count": 3, 
+      "text": "servo"
+    }, 
+    {
+      "count": 3, 
+      "text": "swivel"
+    }, 
+    {
+      "count": 3, 
+      "text": "rules"
+    }, 
+    {
+      "count": 3, 
+      "text": "apprenticeships"
+    }, 
+    {
+      "count": 3, 
+      "text": "leave"
+    }, 
+    {
+      "count": 3, 
+      "text": "measurements"
+    }, 
+    {
+      "count": 3, 
+      "text": "tag"
+    }, 
+    {
+      "count": 3, 
+      "text": "clumps"
+    }, 
+    {
+      "count": 2, 
+      "text": "item"
+    }, 
+    {
+      "count": 2, 
+      "text": "designators"
+    }, 
+    {
+      "count": 2, 
+      "text": "discharge"
+    }, 
+    {
+      "count": 2, 
+      "text": "mines"
+    }, 
+    {
+      "count": 2, 
+      "text": "laws"
+    }, 
+    {
+      "count": 2, 
+      "text": "equivalents"
+    }, 
+    {
+      "count": 2, 
+      "text": "wills"
+    }
+  ]
+}

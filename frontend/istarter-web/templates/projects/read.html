@@ -1,0 +1,161 @@
+<div class="nav-classification"><max-protective-marking></max-protective-marking></div>
+<div class="container">
+
+  <div class="row">
+  
+    <!-- left hand column  -->
+    <div class="span8">
+      <div class="well project-title" ng-class="{'author-highlight':user.isAuthor}">
+  
+        <!-- protective marking -->
+        <div class="prot-marking pull-right">
+          <protective-marking type="compact"></protective-marking>
+        </div>
+
+          <h1 ng-class="{'draft' : project.status === 'draft','deleted' : project.status === 'deleted', 'hidden-doc' : project.status === 'hidden'}">
+            <span ng-show="project.status === 'draft'">DRAFT : </span>
+            <span ng-show="project.status === 'deleted'">DELETED : </span> {{project.title}}
+          </h1>
+          <!-- time created and contributor -->
+          <small>
+            <span class="contributor">{{project.contributor_name}}</span>
+            <span class="contributor-time" popover="Project submitted by {{project.contributor_name}} at {{project.created | date: 'HH:mm' }} on {{project.created | date: 'dd/MM/yyyy' }}" popover-trigger="mouseenter">{{project.informal_created}}</span>
+          </small>
+          <button class="btn btn-mini disabled pull-right" popover-trigger="mouseenter" popover="Share this project via email" popover-placement="left" ng-click="shareProjectEmail(project)" ng-show="project.status==='published'"><i class="icon-envelope" ></i> share</button>
+         
+      </div>
+      <div class="well description"><small>
+        <div class="pm-text">
+          <protective-marking type="text"></protective-marking>
+        </div>
+        <div ng-bind-html="project.description"></div>
+      </small></div>
+      <div class="form-buttons">
+        <span ng-show="user.isAuthor || user.isAdmin">
+          <button class="btn btn-small btn-info push-right" ng-click="editProject()" ng-show="project.status === 'published'"><i class="icon-pencil icon-white"></i> Edit </button>
+          <button class="btn btn-small btn-warning push-right" ng-click="editProject()" ng-show="project.status === 'draft'"><i class="icon-pencil icon-white"></i> Edit draft </button>
+          <button class="btn btn-small btn-warning push-right" ng-click="editProject()" ng-show="project.status === 'hidden'"><i class="icon-pencil icon-white"></i> Edit hidden </button>
+          <button class="btn btn-small btn-danger push-right" ng-click="confirmSoftDeleteProject()" ng-show="project.status !=='deleted'"><i class="icon-trash icon-white"></i> Delete </button>
+          <button class="btn btn-small btn-danger push-right" ng-click="confirmDeleteProject()" ng-show="user.isAdmin && project.status ==='deleted'"><i class="icon-trash icon-white"></i> Delete Permanently </button>
+        </span>
+          <button class="btn btn-small btn-primary push-right" ng-click="closeProject()"><i class="icon-remove icon-white"></i> Close </button>
+        </div>
+    </div><!-- end left hand column -->
+    
+    <!-- right hand column -->
+    <div class="span4">
+        <div class="well">
+          <h5>Related ideas</h5>
+          <small><span class="muted"><small>Ideas that are related to this project</small></span>
+          <!-- search/filter -->
+          <div class="control-group">
+            <ul>
+              <li ng-repeat="idea in project.related_ideasList"><a ng-href="" title="Click to open: {{idea.title}}" ng-click="openIdea(idea.id)" >{{idea.title}}</a></li>
+            </ul>
+          </div>
+        </small>
+        </div>
+      </div>
+      
+    <div class="span4">
+      
+      <!--  -->
+      <div class="well" ng-show="project.status==='published'">
+        <h5>Project backing</h5>
+        <div><small>
+          <ng-pluralize count="project.back_count" when="{'0' : 'Nobody has backed this project yet', '1' : 'One person has backed this project', 'other' : '{} people have backed this project'}">
+          </ng-pluralize>
+          <div>
+          <ul class="backers-list">
+            <li ng-repeat="backers in project.backs">
+              <a ng-href="" ng-click="user.loadProfile(backers.user)">{{backers.contributor_name}}</a> <a ng-href="" ng-click="removeBacking(backers.resource_uri)" ng-show="backers.user === project.user" class="btn btn-tiny btn-danger" popover-trigger="mouseenter" popover="Remove your backing for this project" popover-placement="auto">x</a>
+            </li>
+          </ul>
+          </div>
+          </small>
+        </div>
+        <div class="clearfix ratings-buttons">
+          <a class="btn btn-success btn-small pull-left" ng-href="" ng-click="comment.add(project.id, 'backing', pm, user, 'project')" ng-show="project.user_backed !== 1"><i class="icon-ok icon-white"></i> Back this project</a>
+        </div>
+      </div><!--  -->
+      
+      <!--  -->
+      <div class="well tags">
+        <div>
+          <h5><i class="icon-tags"></i> Tags</h5>
+        </div>
+        <div>
+          <button class="btn btn-mini btn-tag disabled clickable" ng-click="filterByTag(tag)" ng-href="" ng-repeat="tag in project.tags"><i class="icon-tag" ></i> {{tag}}</button> 
+        </div>
+
+      </div><!--  -->
+
+      <!--  -->
+      <div class="well" ng-show="project.status==='published'"><h5><i class="icon-comment"></i> Comments</h5>
+      
+        <a class="btn btn-mini disabled btn-inverse clickable ng-scope ng-binding" popover="Click to add your comment on this project" popover-title="0 comments" popover-trigger="mouseenter" ng-href="" ng-click="comment.add(project.id, 'comment', pm, user, 'project')"><i class="icon-comment icon-white"></i> {{project.comment_count}} Comments </a>
+      </div>
+      <div class="well comment clearfix" ng-repeat="comment in project.comments" ng-class="{'author-highlight':user.id() === comment.user}">
+        <small>
+          <div  class="pull-left"><i class="icon-comment"></i>
+          <span class="contributor">{{comment.contributor_name}}</span>
+          <span class="contributor-time" tooltip="Comment added at {{comment.created | date: 'HH:mm' }} on {{comment.created | date: 'dd/MM/yyyy' }}">{{comment.informal_created}}</span>
+          </div>
+          <div class="pull-right">
+          <comment-protective-marking></comment-protective-marking>
+          </div>
+          <div class="clearfix"></div>
+          <div>
+          <p class="comment-body">
+            <span class="comment-title" ng-show="comment.type === 'backing'"><i class="icon-hand-up icon-white backed"></i> Backed this project. {{comment.title}}</span>
+            <span class="comment-title" ng-show="comment.type === 'comment'">{{comment.title}}</span> 
+            {{comment.body}}
+          </p>
+           
+          <div ng-show="user.id() === comment.user">
+            <button class="btn btn-mini btn-tag disabled clickable" tooltip="Edit this comment" ng-click="editComment(comment.resource_uri)"><i class="icon-pencil"></i></button>
+            <button class="btn btn-mini btn-tag disabled clickable" tooltip="Delete this comment" ng-click="deleteComment(comment.resource_uri)"><i class="icon-trash"></i></button>
+          </div>
+
+          </div>
+        </small>
+      </div><!--  -->
+            <div class="form-buttons">
+      <a class="btn btn-small btn-inverse clickable ng-scope ng-binding" ng-href="" ng-click="comment.add(project.id, 'comment', pm, user, 'project')"><i class="icon-comment icon-white"></i> Add a comment </a>
+      </div>
+    </div><!-- end right hand column -->
+    
+  </div><!-- end row -->
+</div>
+
+
+  <div class="popup-alert confirm-soft-delete-project alert alert-alert">
+    <button class="btn btn-danger btn-close btn-mini pull-right" ng-click="closePopupAlert()" title="Cancel" type="button">
+      <i class="icon-remove icon-white"></i>
+    </button>
+    <h4><i class="icon icon-trash"></i> Delete project?</h4>
+    <br />
+    <p>Are you sure you want to delete this project and all of it's comments, likes and dislikes? </p><br />
+    <button class="btn btn-warning pull-left" ng-click="closePopupAlert();softDeleteProject()" title="Confirm delete">  Yes  </button>
+    <button class="btn btn-danger pull-right" ng-click="closePopupAlert()" title="Cancel" >  No  </button>
+  </div>
+
+  <div class="popup-alert confirm-delete-project alert alert-danger">
+    <button class="btn btn-danger btn-close btn-mini pull-right" ng-click="closePopupAlert()" title="Cancel" type="button">
+      <i class="icon-remove icon-white"></i>
+    </button>
+    <h4><i class="icon icon-trash"></i> Delete project?</h4>
+    <br />
+    <p>Are you sure you want to <strong>permanently delete</strong> this project and all of it's comments, likes and dislikes? </p><br />
+    <button class="btn btn-warning pull-left" ng-click="closePopupAlert();deleteProject()" title="Confirm delete">  Yes  </button>
+    <button class="btn btn-danger pull-right" ng-click="closePopupAlert()" title="Cancel" >  No  </button>
+  </div>
+  
+  <div class="popup-alert project-deleted alert alert-info">
+    <button class="btn btn-danger btn-close btn-mini pull-right" ng-click="closePopupAlert();closeProject(true)" title="Cancel" type="button">
+      <i class="icon-remove icon-white"></i>
+    </button>
+    <h4><i class="icon icon-trash"></i> Project deleted.</h4>
+    <br />
+    <p>This project has now been deleted</p>
+  </div>

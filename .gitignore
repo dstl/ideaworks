@@ -1,0 +1,57 @@
+*.py[cod]
+
+# C extensions
+*.so
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+
+# Javascript in front end has a lib directory
+#lib
+#lib64
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+
+# Translations
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+
+#  Hide Finder details on OSX
+.DS_Store
+
+# Hide xemacs backup files
+*~
+
+# Django application logs
+*.gitignore.log
+
+# ignore project specific files
+*.log
+
+.spyderproject
+
+# Ignore the sql db
+*.db
+
+# Ignore the email settings
+email_settings.*

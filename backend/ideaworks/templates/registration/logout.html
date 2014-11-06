@@ -1,0 +1,17 @@
+<!-- (c) Crown Copyright 2014 Defence Science and Technology Laboratory UK 
+# Author: Rich Brantingham  -->
+
+{% extends "base.html" %}
+{% load auth_tags %}
+
+{% block title_extra %} Logged Out {% endblock %} 
+{% block main_block %}
+
+<div class="form-container">
+  <div class="form-auth" >
+    <h2>Logged out.</h2>
+    <p>You have been logged out.</p>
+    <!-- <a href="{% url "auth_login"%}>Login again</a>  -->
+  </div>
+</div>
+{% endblock %}

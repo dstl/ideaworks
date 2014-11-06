@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="well">
+    <h3> <i class="icon-tag"></i> All Tags ({{tags.meta.total_count}})</h3>
+    <form class="form-inline form-search">
+      <div class="control-group">
+        <label class="control-label">Sort by</label>&nbsp;
+        <select ng-model="orderProp" ng-init=" orderProp='text' " class="span2">
+          <option value="-count">Most popular</option>
+          <option value="count">Least popular</option>
+          <option value="text">A-Z</option>
+        </select> &nbsp;&nbsp;&nbsp;
+       
+        <label>Filter </label>&nbsp;
+          <div class="">
+            <input type="text" class="span2 search-query input-small view-filter" ng-model="query" placeholder="Type to filter tags...">
+            <button class="btn" ng-click="clearFilter()"><i class="icon-remove"></i></button>
+          </div>
+        <a class="btn btn-inverse" ng-click="addNewTag()" ng-href="">Add new tag</a>
+      </div>
+    </form>
+    <div>
+      <hr/>
+      <span class="tags" ng-repeat="tag in tags.objects | orderBy:orderProp | filter:query">
+        <a class="btn" ng-click="openTag(tag.text)" ng-href=""><i class="icon-tag"></i> {{tag.text}} {{tag.count}}</a> 
+      <span>
+    </div>
+  </div>
+</div>
+
+

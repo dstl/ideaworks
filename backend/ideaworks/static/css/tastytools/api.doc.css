@@ -1,0 +1,69 @@
+.myButton {
+    -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+    -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+    box-shadow:inset 0px 1px 0px 0px #ffffff;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #ffffff) );
+    background:-moz-linear-gradient( center top, #ffffff 5%, #ffffff 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ffffff');
+    background-color:#ffffff;
+    -moz-border-radius:27px;
+    -webkit-border-radius:27px;
+    border-radius:27px;
+    border:1px solid #dcdcdc;
+    display:inline-block;
+    color:#e61212;
+    font-family:Arial;
+    font-size:15px;
+    font-weight:bold;
+    padding:2px 15px;
+    text-decoration:none;
+    text-shadow:1px 1px 0px #ffffff;
+}.myButton:hover {
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #ffffff) );
+    background:-moz-linear-gradient( center top, #ffffff 5%, #ffffff 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ffffff');
+    background-color:#ffffff;
+}.myButton:active {
+    position:relative;
+    top:1px;
+}
+table th{
+    text-align: left;
+}
+
+#resource_list{
+    width: 980px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.methodsBox span {
+    background: red;
+    color: white;
+    font-weight: bold;
+    padding: 2px;
+}
+.methodsBox span.allowed{
+    background: green;
+}
+
+.field_flag{
+    color: white;
+    background: gold;
+    padding: 2px;
+    border-radius: 5px;
+    visibility: hidden;
+}
+
+.resource_field span.active_flag{
+    visibility: visible;
+}
+
+.resource_btn{
+    cursor: pointer;
+}
+
+textarea {
+    width: 800px;
+    height: 250px;
+
+}

@@ -1,0 +1,19 @@
+<div class="nav-classification"><max-protective-marking></max-protective-marking></div>
+<div class="row">
+
+  <!--Sidebar content-->
+  <div class="span3">
+    <ng-include src="'templates/ideas/view/sidebar.html'"></ng-include>  
+  </div><!-- END Sidebar content -->
+  
+  <!-- main view area -->
+  <div class="span9 view-area" ng-class="viewName">
+    
+    <ng-include src="'templates/ideas/view/switch-layout.html'"></ng-include>
+    <div class="view-body">
+    <!-- table (ngGrid) -->
+    <div class="list-view" ng-grid="gridOptions"></div>
+    
+  </div>
+  </div>
+</div>

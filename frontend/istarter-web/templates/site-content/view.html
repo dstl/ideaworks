@@ -1,0 +1,43 @@
+<div class="nav-classification"><max-protective-marking></max-protective-marking></div>
+<div class="row">
+  
+  <!-- main view area -->
+  <div class="span12 view-area">
+    
+    <div class="view-body">
+    <!-- Repeated per content : grid-box content -->
+    <div class="summary-box clearfix" ng-repeat="content in siteContent" view-loading>
+      <div class="well  inner-summary-box clearfix">
+        <small>
+        <!-- content title -->
+            <div class="content-title">
+              <h5 class="clickable" ng-class="{'draft' : content.status === 'draft', 'deleted' : content.status === 'deleted', 'hidden-content' : content.status === 'hidden'}">
+                <a ng-href="" title="Click to open: {{content.title}}" ng-click="openContent(content.id)" >
+                  <span ng-show="content.status === 'draft'">DRAFT : </span>
+                  <span ng-show="content.status === 'deleted'">DELETED : </span> 
+                  <span ng-show="content.status === 'hidden'">HIDDEN : </span> 
+                  {{content.title}}
+                </a>
+              </h5>
+            </div>
+
+            <!-- protective marking -->
+            <div class="prot-marking">
+              <protective-marking type="full"></protective-marking>
+            </div>
+             <!-- description -->
+            <div class="content-summary">Type : {{siteContentTypes[content.type].label}}  <span ng-show="content.index"> (index page)</div>
+            <!-- time created -->
+            <div>
+            <span class="contributor">{{content.contributor_name}}</span>
+            <span class="contributor-time" popover="Content created by {{content.contributor_name}} at {{content.created | date: 'HH:mm' }} on {{content.created | date: 'dd/MM/yyyy' }}" popover-trigger="mouseenter">{{content.informal_created}}</span>
+            </div>
+            <!-- description -->
+            <div class="content-summary">{{content.summary}}</div>
+          </small>
+      </div>
+      
+    </div>
+    </div>
+  </div>
+</div>

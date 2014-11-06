@@ -1,0 +1,66 @@
+<div class="nav-classification"><max-protective-marking></max-protective-marking></div>
+  <div class="row">
+    <div class="span3">
+      <!--Sidebar content-->
+      <div class="well well-small">
+        <a href="#/ideas/create">
+          <small>Create a new idea</small>
+        </a>
+      </div>
+      
+      <div class="well well-small">
+      
+        <form class="form-search">         <div class="control-group">
+          <label>Quick search... </label>
+          <div class="input-append">
+            <input type="text" class="span2 search-query input-small view-filter" ng-model="query" placeholder="Type to filter ideas...">
+            <button class="btn" ng-click="clearFilter()"><i class="icon-remove"></i></button>
+          </div>
+          </div>
+          <div class="control-group">
+          <label>Sort by</label>
+          <select ng-model="orderProp" ng-init=" orderProp='-id' " class="span2">
+            <option value="-id">Latest first</option>
+            <option value="id">Oldest first</option>
+            <option value="title">A-Z</option>
+          </select>
+          
+          </div>
+  </form>
+
+      
+
+    </div>
+    </div>
+    <div class="span9">
+      <!--Body content-->
+
+        <ul class="nav nav-tabs">
+          <li ><a href="#/ideas/view-latest">Latest Ideas</a></li>
+          <li class="active"><a href="#/ideas/view-all">All Ideas ({{ideasCount}})</a></li> 
+        </ul>
+
+        <div class="loading" ng-show="viewIsLoading">LOADING Please wait....{{viewIsloading}} 
+          <div class="progress progress-success progress-striped active"><div class="bar" style="width:100%"></div></div>
+        </div>
+        
+        <div ng-repeat="idea in ideas | filter:query | orderBy:orderProp" class="well well-small clearfix" view-loading>
+        <small>
+          <div class="span7">
+            <h5><protective-marking type="compact"></protective-marking> <a href="#/ideas/{{idea.id}}/">{{idea.title}}</a></h5><p>
+            {{idea.description | truncate:330}}</p><a href="" class="informal-time-stamp"  tooltip="Idea submitted on {{idea.created | date: 'dd/MM/yyyy HH:mm' }}">{{idea.informal_created}}</a>
+           
+          </div>
+          <div class="view-ratings-bar span2">
+            <idea-likes-bar></idea-likes-bar>
+            <div class="clearfix ratings-buttons">
+              <a class="btn btn-success btn-small pull-left" ng-href="" ng-click="addLike()" title="I like this idea"><i class="icon-thumbs-up icon-white"></i></a>
+              <a class="btn btn-danger btn-small pull-right" ng-href="" ng-click="addDislike()" title="I don't like this idea"><i class="icon-thumbs-down icon-white"></i></a>
+            </div>
+            <div class="comment-count"><i class="icon-comment"></i> {{idea.comment_count}}</div>
+          </div>
+          </small>
+        </div>
+
+    </div>
+  </div>

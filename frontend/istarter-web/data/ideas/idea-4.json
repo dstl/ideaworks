@@ -1,0 +1,52 @@
+{
+  "backer_count": 2, 
+  "backers": [
+    {
+      "date_joined": "2012-06-22T19:17:14.077384", 
+      "email": " column war grants anticipation", 
+      "first_name": " aprons breakdowns", 
+      "id": 91, 
+      "last_login": "2010-06-11T10:56:34.247893", 
+      "last_name": " altitude", 
+      "resource_uri": "/api/v1/user/91/", 
+      "username": "maneuvers"
+    }, 
+    {
+      "date_joined": "2010-02-23T00:45:06.704962", 
+      "email": " store monoliths liberty grooves", 
+      "first_name": " clap floors", 
+      "id": 493, 
+      "last_login": "2010-01-20T03:24:24.066098", 
+      "last_name": " diagnosis fuels", 
+      "resource_uri": "/api/v1/user/493/", 
+      "username": "automation"
+    }
+  ], 
+  "classification": "CONFIDENTIAL", 
+  "date_published": "2010-10-05T21:59:36.172752", 
+  "date_verified": "2011-11-03T09:43:31.018729", 
+  "description": " spills fact core accidents drydock prepositions distributor satellites execution dwell distress volume slits country card keels ounces misalignment cements saddle responses composition farms overcurrents codes rumble", 
+  "dislikes": 0, 
+  "id": 4, 
+  "likes": 0, 
+  "resource_uri": "/api/v1/idea/4/", 
+  "tags": [
+    {
+      "id": 2, 
+      "name": "xxx_test_tag", 
+      "resource_uri": "/api/v1/tag/2/", 
+      "slug": "xxx_test_tag"
+    }, 
+    {
+      "id": 8, 
+      "name": "abuse\n", 
+      "resource_uri": "/api/v1/tag/8/", 
+      "slug": "abuse"
+    }
+  ], 
+  "title": " hopes river alibis services diagonals parcels laugh nations automobiles impact vapor measures question", 
+  "user": "/api/v1/user/307/", 
+  "verified": true, 
+  "votes": [], 
+  "voting_ts": []
+}

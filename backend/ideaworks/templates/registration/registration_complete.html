@@ -1,0 +1,27 @@
+<!-- (c) Crown Copyright 2014 Defence Science and Technology Laboratory UK 
+# Author: Rich Brantingham  -->
+
+{% extends "base.html" %}
+{% load auth_tags %}
+{% block title_extra %} Registration Confirmation {% endblock %} 
+
+{% block main_block %}
+<div class="form-container">
+	<div class="form-auth" >
+		<h2>
+			Got mail?
+		</h2>
+		<p>
+			We've sent you a confirmation email. 
+		</p>
+		<p>
+			Please check your email and confirm your account by clicking on the 'confirm' button.
+		</p>
+		<p>
+			If you don't receive an email from us, give it <strong>5 minutes</strong>, 
+			check your <strong>junk mail</strong> and if it's still not there then please get 
+			in <a href="mailto:{% admin_email %}">contact.</a>
+		</p>
+	</div>
+</div>
+{% endblock %}

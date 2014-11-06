@@ -1,0 +1,133 @@
+<div class="container">
+  <form name="ideaForm" ng-submit="submitIdea(ideaForm.$valid, 'published')" novalidate>
+    <!-- novalidate prevents any HTML5 validation -->
+    <div class="row">
+      <div class="span8">
+        <div class="well">
+          <h4 ng-show="mode === 'create'"><i class="icon-large icon-lightbulb"></i> Add a new idea</h4>
+          <h4 ng-show="mode === 'edit' && idea.status === 'draft'" class="draft"><i class="icon icon-pencil"></i> <span>DRAFT : </span> Edit idea</h4>
+          <h4 ng-show="mode === 'edit' && idea.status !== 'draft'"><i class="icon icon-pencil"></i> Edit idea</h4>
+          <div class="status form-inline" ng-class="{'new-unsaved' : idea.status === 'new unsaved','draft' : idea.status === 'draft','deleted' : idea.status === 'deleted', 'hidden-doc' : idea.status === 'hidden'}"><label>Status </label>&nbsp;&nbsp;<span><small> {{idea.status | uppercase}}</small></span></div>
+          <div class="form-inline hidden-doc chkbox" ng-show="user.isAdmin"><input type="checkbox" ng-model="hideIdea" id="hideIdeaChk"> <label for="hideIdeaChk"> Hide this idea</label> </br> 
+          
+          </div>
+           <div class="form-group" ng-class="{'text-error':ideaForm.title.$invalid && idea.submitted}">
+            <label>Idea Title</label>
+            <div ng-show="ideaForm.title.$invalid && idea.submitted" class="error-message">Please enter a title for your idea</div>
+            <input class="input-block-level form-control" name="title" ng-model="idea.title" placeholder="Give a brief idea title" required type="text" maxlength=140>
+            
+          </div>
+          <div class="form-group description" ng-class="{'text-error':ideaForm.description.$invalid && idea.submitted}">
+            <label>Idea description</label>
+            <div ng-show="ideaForm.description.$invalid && idea.submitted" class="error-message">Please enter a description of your idea</div>
+            <div text-angular name="description" ng-model="idea.description" ng-required=true></div>
+            <!-- <textarea class="input-block-level form-control" name="description" ng-model="idea.description" placeholder="Give a full description of your idea here" required rows="8"></textarea> -->
+            
+          </div>
+
+        </div>
+        
+          <div class="well">        
+          <div class="form-group" ng-class="{'text-error':ideaForm.classification.$invalid && idea.submitted}">
+
+            <label>Protective marking &nbsp;&nbsp;<protective-marking type="full"></protective-marking></label>
+            
+            <div ng-show="ideaForm.classification.$invalid && idea.submitted" class="error-message">Please select a classification</div>
+            <select class="form-control classification-select" name="classification" ng-model="selectClassification" ng-options="x.value as x.text for x in pm.classifications.list" ng-change="updatePM()" required>
+              <option value="">-- Select a classification --</option>
+            </select>
+            <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#pm-options">
+              <small>
+                <span class="closed">show more options <i class="icon-chevron-down"></i></span>
+                <span class="opened">&nbsp;show less options <i class="icon-chevron-up"></i></span>
+              </small>
+            </button>
+
+          </div>
+
+          <div id="pm-options" class="collapse">
+
+          <div class="sidebyside">
+            <label>Codewords <small class="muted">(hold CTRL to select multiple)</small></label>
+            <select class="form-control codewords-select" name="codewords" ng-model="idea.protective_marking.codewords" ng-options="x for x in pm.codewords.list" ng-change="updatePM()" multiple>
+              <option value="">None</option>
+            </select>
+          </div>  
+          <div class="sidebyside">
+            <label>Descriptor</label>
+            <select class="form-control" name="descriptor" ng-model="idea.protective_marking.descriptor" ng-options="x for x in pm.descriptors.list" ng-change="updatePM()">
+              <option value="">Nothing selected</option>
+            </select>
+         </div>
+         <div class="sidebyside">
+            <label>National Caveats</label>
+            <div class="form-group">
+              <select class="form-control" name="national_caveats" ng-model="idea.protective_marking.national_caveats_primary_name" ng-options="x for x in pm.national_caveats.list" ng-change="updatePM()">
+                <option value="">Nothing selected</option>
+              </select>
+            </div>
+          </div>
+
+          </div>
+          </div>
+  
+        <div class="form-buttons">
+          <span ng-show="hideIdea">
+            <button class="btn btn-small btn-warning push-right" type="button" ng-click="submitIdea(ideaForm.$valid, 'hidden')" ng-disabled="ideaForm.$invalid && idea.submitted" ng-show="mode === 'create' && idea.status === 'new unsaved'"><i class="icon-eye-open icon-white"></i> Save as hidden </button>
+            <button class="btn btn-small btn-success push-right" type="button" ng-click="saveIdea(ideaForm.$valid, 'hidden')" ng-show="mode === 'edit' && idea.status === 'hidden'"><i class="icon-eye-open icon-white"></i> Save as hidden. </button>
+          </span>
+          <span ng-show="!hideIdea">
+            <button class="btn btn-small btn-warning push-right" type="button" ng-click="submitIdea(ideaForm.$valid, 'draft')" ng-disabled="ideaForm.$invalid && idea.submitted" ng-show="mode === 'create' && (idea.status === 'draft' || idea.status === 'new unsaved')"><i class="icon-file icon-white"></i> Save as draft </button>
+            <button class="btn btn-small btn-success push-right" type="submit" ng-disabled="ideaForm.$invalid && idea.submitted" ng-show="mode === 'create' && (idea.status === 'draft' || idea.status === 'new unsaved')"><i class="icon-ok icon-white"></i> Submit </button>
+                      
+            <button class="btn btn-small btn-warning push-right" type="button" ng-click="saveIdea(ideaForm.$valid, 'draft')" ng-disabled="ideaForm.$invalid && idea.submitted" ng-show="mode === 'edit' && idea.status === 'draft'"><i class="icon-file icon-white"></i> Save as draft</button>
+            <button class="btn btn-small btn-success push-right" type="button" ng-click="saveIdea(ideaForm.$valid, 'published')" ng-disabled="ideaForm.$invalid && idea.submitted" ng-show="mode === 'edit' && idea.status === 'draft'"><i class="icon-ok icon-white"></i> Submit </button>
+            <button class="btn btn-small btn-info push-right" type="button" ng-click="saveIdea(ideaForm.$valid, 'published')" ng-disabled="ideaForm.$invalid && idea.submitted" ng-show="mode === 'edit' && idea.status === 'published'"><i class="icon-ok icon-white"></i> Submit changes </button>
+          </span>
+          <button class="btn btn-small btn-primary push-right" type="button" ng-click="cancelIdea()"><i class="icon-remove icon-white"></i> Cancel </button>
+        </div>
+      </div>
+      
+      <div class="span4">
+        <div class="well">
+          <h4>Tag your idea</h4>
+          <small><span class="muted"><small>To add a new tag enter it below and click + </small></span>
+          <small>
+          <!-- search/filter -->
+          <div class="control-group">
+          
+            <div class="input-append">
+              <input class="span2 input-small view-filter" ng-model="taglistfilter" placeholder="Filter / add new tag..." type="text" maxlength=25>
+              <button class="btn btn-small" ng-click="clearFilter()" type="button" tooltip="Clear the filter">
+                <i class="icon-remove"></i>
+              </button>
+              <button class="btn btn-small" ng-click="addNewTag()"  type="button" tooltip="Add as a new tag"><i class="icon-plus"></i></button>
+            </div>
+            <div class="tagExistsAlert alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>This tag already exists</strong><br />Please enter a unique name for the new tag</div>
+            <label class="control-label">Sort tags by&nbsp;
+              <a ng-href="" ng-click="sortTags('text')">A to Z</a> &nbsp;|&nbsp;
+              <a ng-href="" ng-click="sortTags('-count')">most popular</a>
+            </label>
+            
+            <select ng-model="orderProp" ng-init=" orderProp='text' " class="span2 hidden">
+              <option value="-count">Most popular</option>
+              <option value="text">A-Z</option>
+            </select>
+          <br />
+          <span class="new-tags tags"></span>
+          <div class="form-group" ng-class="{'text-error':ideaForm.taglist.$invalid && idea.submitted}">
+          <input class="form-control" name="taglist" ng-model="idea.taglist" required type="text" ng-show="false">
+          <div ng-show="ideaForm.taglist.$invalid && idea.submitted" class="error-message">Please select at least one tag for this idea</div>
+          </div>
+          <span class="tags" >
+            <a id="" class="btn btn-mini btn-tag disabled" ng-click="addTag($event)" ng-href="" ng-class="{'btn-info':isTagInArray(tag.text)}" ng-repeat="tag in tags.objects | orderBy:orderProp | filter:taglistfilter">{{tag.text}}</a>
+          <span>
+        </div>
+        </small>
+        </div>
+      </div>
+      
+    </div>
+  </form>
+</div>

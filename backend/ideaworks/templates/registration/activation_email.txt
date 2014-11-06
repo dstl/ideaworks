@@ -1,0 +1,8 @@
+<!-- (c) Crown Copyright 2014 Defence Science and Technology Laboratory UK 
+# Author: Rich Brantingham  -->
+
+Here's the activation link:
+
+http://{{ site.domain }}{% url "registration_activate" activation_key=activation_key %}
+
+

@@ -1,0 +1,19 @@
+[{"descriptor"	 		: "COMMERCIAL",
+  "comment" 			: "Commercial- or market-sensitive information, including that subject to statutory or regulatory obligations, that may be damaging to HMG or to a commercial partner if improperly accessed.",
+  "source"				: "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/251480/Government-Security-Classifications-April-2014.pdf",
+  "national_authority" 	: "UK",
+  "active"				: true},
+  
+ {"descriptor"	 		: "LOCSEN",
+  "comment" 			: "Sensitive information that locally engaged staff overseas cannot access.",
+  "source"				: "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/251480/Government-Security-Classifications-April-2014.pdf",
+  "national_authority" 	: "UK",
+  "active"				: true},
+  
+ {"descriptor"	 		: "PERSONAL",
+  "comment" 			: "Particularly sensitive information relating to an identifiable individual, where inappropriate access could have damaging consequences. For example, where relating to investigations, vulnerable individuals, or the personal / medical records of people in sensitive posts (e.g. military, SIA).",
+  "source"				: "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/251480/Government-Security-Classifications-April-2014.pdf",
+  "national_authority" 	: "UK",
+  "active"				: true}
+  
+]

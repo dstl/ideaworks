@@ -1,0 +1,21 @@
+<div class="popup-alert duplicate-vote alert alert-info">
+  <button class="btn btn-danger btn-mini pull-right" ng-click="closePopupAlert()" title="Cancel" type="button">
+    <i class="icon-remove icon-white"></i>
+  </button>
+  <h4>Duplicate Vote</h4>
+  <br />
+  <p>Sorry, only one like or dislike allowed per idea.</p>
+</div>
+
+<div class="popup-alert anonymous-action alert-info">
+  <button class="btn btn-danger btn-mini pull-right" ng-click="closePopupAlert()" title="Cancel" type="button">
+    <i class="icon-remove icon-white"></i>
+  </button>
+  <h4>Please login</h4>
+  <br />
+  <p>Sorry, you must be logged in to perform this action</p>
+  <p>If you are already a registered user then please <a ng-href="" ng-click="user.login()" title="Click to login">login</a></p>
+  <p>Or <a ng-href="" ng-click="user.register()" title="Click to register">register</a> for a new account</p>
+</div>
+
+<div class="popup-alert-mask">&nbsp;</div>

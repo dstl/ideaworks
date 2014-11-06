@@ -1,0 +1,34 @@
+<!-- create a new feedback link -->
+<div class="new-idea">
+ <button ng-click="createFeedback(user)" class="btn btn-block btn-large btn-info" ng-class="{'disabled':user.name() === 'Anonymous'}" title="Add your new feedback!"><i class="icon-white icon-retweet"></i> Submit feedback </button>
+</div>
+
+<!-- View search/filter and sort controls -->
+<div class="well well-small" ng-class="viewLayout">
+  <form>
+    <!-- search/filter -->
+    <div class="control-group" ng-show="viewLayout !=='list'">
+      <label>Quick search...
+      </label>
+      <div class="input-append">
+        <input class="span2 input-small view-filter" ng-model="$parent.filterOptions.filterText" placeholder="Type to filter feedback..." type="text">
+        <button class="btn btn-small" ng-click="clearFeedbackFilter()">
+          <i class="icon-remove"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- sort by -->
+    <div class="control-group">
+      <label>Sort by</label>
+      <select class="span2"  ng-model="$parent.orderProp">
+        <option value="-created">Latest first</option>
+        <option value="created">Oldest first</option>
+        <option value="title">A-Z</option>
+        <option value="contributor_name">Author</option>
+      </select>
+    </div>
+    
+  </form>
+</div>
+    

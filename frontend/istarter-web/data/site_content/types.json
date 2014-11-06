@@ -1,0 +1,22 @@
+{
+  "homepage" : {
+    "key" : "homepage",
+    "label" : "Home page",
+    "navtext" : "Home pages"
+  },
+  "faq" : {
+    "key" : "faq",
+    "label" : "FAQ",
+    "navtext" : "FAQs"
+  },
+  "document" : {
+    "key" : "document",
+    "label" : "Document",
+    "navtext" : "Documents"
+  },
+  "help" : {
+    "key" : "help",
+    "label" : "Help",
+    "navtext" : "Help pages"
+  }
+}

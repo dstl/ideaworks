@@ -1,0 +1,95 @@
+<!-- (c) Crown Copyright 2014 Defence Science and Technology Laboratory UK -->
+
+<!DOCTYPE html>
+
+<html id="ng-app" lang="en" ng-app="ideaworks.ngApp">
+
+  <head>
+  
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="author">
+   
+    <title>IdeaWorks</title>
+    
+    <!-- CSS -->
+   
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap/232/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/232/css/bootstrap.icon-large.css" rel="stylesheet">
+    <link href="bootstrap/232/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="bootstrap/232/css/bootstrap-sortable.css" rel="stylesheet">
+    <link href="bootstrap/232/css/bootstrap-select.min.css" rel="stylesheet">
+    
+    
+    <!-- animations -->
+    <link href="css/animations.css" rel="stylesheet">
+    
+    <link href="css/ng-grid.css" rel="stylesheet">
+   
+    <!-- Main app css -->
+    <link href="css/app.css" rel="stylesheet">
+    
+    <!-- font-awesome -->
+    <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+   
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <script src="js/lib/html5shiv.js"></script>
+    <script src="js/lib/respond.min.js"></script>
+   
+
+    <!-- JavaScript -->
+    
+    <!-- jQuery -->
+    <script src="js/lib/jquery/jquery-1.10.2.min.js"></script>
+    <script src="js/lib/jquery/jquery.cookie.js"></script>
+   
+    <!-- AngularJS -->
+    <script src="js/lib/angular/angular.min.js"></script>
+    <script src="js/lib/angular/angular-ui-bootstrap.min.js"></script>
+    <script src="js/lib/angular/angular-bootstrap-select.js"></script>
+    <script src="js/lib/angular/ng-grid.min.js"></script>
+    <script src="js/lib/angular/angular-animate.min.js"></script>
+    <script src="js/lib/angular/angular-resource.min.js"></script>
+    <script src="js/lib/angular/angular-route.min.js"></script>
+    <script src="js/lib/angular/angular-cookies.min.js"></script>
+    <script src="js/lib/angular/angular-sanitize.min.js"></script>
+    <script src="js/lib/angular/textAngular.js"></script>
+   
+    <!-- Bootstrap -->
+    <script src="bootstrap/232/js/bootstrap.min.js"></script>
+    <script src="bootstrap/232/js/bootstrap-sortable.js"></script>
+    <script src="bootstrap/232/js/bootstrap-select.min.js"></script>
+   
+    <!-- App specific -->
+    <script src="js/app.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/services.js"></script>
+    
+  </head>
+  
+  <body ng-controller="appCtrl">
+
+    <div id="wrap">
+      <ng-include src="'templates/top-menu.html'"></ng-include>
+      <div class="container" ng-view=""></div>
+      <div id="push"><!-- keeps footer pushed to bottom of browser --></div>
+    </div>
+  
+    <footer class="footer" id="footer">
+      <div class="container">
+        <p><strong><a href="#/docs/description-of-service">ALPHA Prototype</a> </strong>: Built on free and open source software &nbsp;&nbsp;&nbsp;&copy Dstl 2014</p>
+        <p>
+        <a href="#/docs/about">About IdeaWorks</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<p>
+      </div>
+    </footer>
+    <ng-include src="'templates/ideas/popups.html'"></ng-include>
+    
+  </body>
+  
+</html>

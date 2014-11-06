@@ -1,0 +1,82 @@
+<!-- create a new project link -->
+<div class="new-project">
+ <button ng-click="createProject()" class="btn btn-block btn-large btn-info" ng-show="user.hasRole('staff')" title="Add your new project!"><i class="icon-large icon-lightbulb"></i> Add a new project</button>
+</div>
+
+<!-- View search/filter and sort controls -->
+<div class="well well-small" ng-class="viewLayout">
+  <form>
+    <!-- search/filter -->
+    <div class="control-group" ng-show="viewLayout !=='list'">
+      <label>Quick search...
+      </label>
+      <div class="input-append">
+        <input class="span2 input-small view-filter" ng-model="$parent.filterOptions.filterText" placeholder="Type to filter projects..." type="text">
+        <button class="btn btn-small" ng-click="clearProjectsFilter()">
+          <i class="icon-remove"></i>
+        </button>
+      </div>
+    </div>
+    
+    <div class="control-group" ng-show="viewLayout =='list'">
+      <label>Filter list...
+      </label>
+      <div class="input-append">
+        <input class="span2 input-small view-filter" ng-model="$parent.filterList" placeholder="Type to filter projects..." type="text">
+        <button class="btn btn-small" ng-click="clearProjectsListFilter()">
+          <i class="icon-remove"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- sort by -->
+    <!-- this div only shows if list layout -->
+    <div ng-show="viewLayout =='list'">
+      <label>Sort by<br /><i>Click the column headers to sort</i></label>
+    </div>
+    
+    <!-- this div only shows if not list layout -->
+    <div class="control-group" ng-show="viewLayout !=='list'">
+      <label>Sort by</label>
+      <select class="span2"  ng-model="$parent.orderProp">
+        <option value="-created">Latest first</option>
+        <option value="created">Oldest first</option>
+        <option value="title">A-Z</option>
+        <option value="-back_count">Most backed</option>
+        <option value="contributor_name">Author</option>
+      </select>
+    </div>
+    
+  </form>
+</div>
+
+<div class="well well-small">
+<!-- tags -->
+   
+    <form class="form-inline">
+      <div class="control-group">
+        <label> <i class="icon-tag"></i> Tags ({{$parent.tags.meta.total_count}})</label>&nbsp;
+          <div class="input-append">
+            <input type="text" class="span2 input-small view-filter" ng-model="tags.filterText" placeholder="Type to filter tags...">
+            <button class="btn btn-small" ng-click="clearTagsFilter()"><i class="icon-remove"></i></button>
+          </div>
+      </div>
+    </form>
+    <div style="display:none">
+      <button class="btn btn-mini btn-tag disabled clickable" ng-show="tagFilterType === 'single'" ng-click="setTagFilterType('multiple')" tooltip="Toggle filter type"><i class="icon-tag"></i></button>
+      <button class="btn btn-mini btn-tag disabled clickable" ng-show="tagFilterType === 'multiple'" ng-click="setTagFilterType('single')" tooltip="Toggle filter type"><i class="icon-tags"></i></button>
+     
+      <small>
+        <span class="muted" ng-show="tagFilterType === 'single'" >Click a tag to filter projects</span>
+        <span class="muted" ng-show="tagFilterType === 'multiple'" >Select tags and click here to filter</span>
+      </small>
+    </div>
+    <div>
+      <span class="tags" ng-repeat="tag in $parent.tags.objects | filter:tags.filterText">
+        <button class="btn btn-mini btn-tag disabled clickable" ng-click="filterByTag(tag.text)" ng-href="" ng-class="{'btn-info':isTagSelected(tag.text)}"><i class="icon-tag"></i> {{tag.text}} {{tag.count}}</button> 
+      </span>
+      <br />
+
+    </div>
+</div>
+    

@@ -1,0 +1,68 @@
+<div class="nav-classification"><max-protective-marking></max-protective-marking></div>
+<div class="row">
+
+  <!--Sidebar content-->
+  <div class="span3">
+    <ng-include src="'templates/ideas/view/sidebar.html'"></ng-include>  
+  </div><!-- END Sidebar content -->
+  
+  <!-- main view area -->
+  <div class="span9 view-area">
+    
+    <ng-include src="'templates/ideas/view/switch-layout.html'"></ng-include>
+    <div class="view-body">
+    <!-- Repeated per idea : grid-box content -->
+    <div class="span3 grid-box" ng-repeat="idea in ideas | filter:filterOptions.filterText | orderBy:orderProp" view-loading>
+      <div class="well inner-grid-box" ng-class="{'author-highlight':user.name() === idea.contributor_name}">
+        <small>
+        
+          <!-- idea title -->
+          <div class="idea-title">
+            <h5><a ng-href="" title="{{idea.title}}"  ng-click="openIdea(idea.id)">{{idea.title | truncate: 50 }}</a></h5>
+          </div>
+          
+          <!-- protective marking -->
+          <div class="prot-marking">
+            <protective-marking type="compact"></protective-marking>
+          </div>
+          
+          <!-- time created -->
+          <div class="informal-time-stamp">
+            <span class="contributor">{{idea.contributor_name}}</span>
+            <span class="contributor-time" popover="Idea submitted by {{idea.contributor_name}} at {{idea.created | date: 'HH:mm' }} on {{idea.created | date: 'dd/MM/yyyy' }}" popover-trigger="mouseenter">{{idea.informal_created}}</span>
+          </div>
+          
+          <!-- description -->
+          <div class="idea-description">{{idea.description_snippet | truncate: 120}}</div>
+          
+          <!-- tags -->
+          <div class="tags">
+            <view-idea-tags type="compact"></view-idea-tags>
+          </div>
+          
+          <!-- comment count -->
+          <div class="comment-count">
+            <a class="btn btn-mini btn-inverse clickable" ng-class="{'disabled':user.name() === 'Anonymous'}" ng-click="comment.add(idea.id, 'comment', pm, user)" ng-href="" popover-trigger="mouseenter" popover-title="{{idea.comment_count}} comments" popover="Click to add your comment on this idea">
+              <i class="icon-comment icon-white"></i> {{idea.comment_count}}
+            </a>
+          </div>
+          
+          <!-- idea ratings -->
+          <div class="view-ratings-bar">
+            <idea-likes-bar></idea-likes-bar>
+            <div class="clearfix ratings-buttons">
+              <a class="btn btn-success btn-small pull-left" ng-click="comment.add(idea.id, 'like', pm, user)" ng-href="" popover-trigger="mouseenter" popover="Click if you like this idea">
+                <i class="icon-thumbs-up icon-white"></i>
+              </a>
+              <a class="btn btn-danger btn-small pull-right" ng-click="comment.add(idea.id, 'dislike', pm, user)" ng-href="" popover-trigger="mouseenter" popover="Click if you don't like this idea">
+                <i class="icon-thumbs-down icon-white"></i>
+              </a>
+            </div>
+          </div>
+          
+        </small>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>

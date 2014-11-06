@@ -1,0 +1,76 @@
+<!-- Project backing comment modal content -->
+<div class="modal" role="dialog" tabindex="-1">
+  <div class="modal-header">
+    <button class="btn btn-danger btn-mini pull-right" ng-click="$parent.cancelModal()" title="Cancel" type="button">
+      <i class="icon-remove icon-white"></i>
+    </button>
+    <h4>
+      <i class="icon-hand-up"></i>
+      Back this project </h4>
+  </div>
+  <div class="modal-body">
+    <form name="commentForm" novalidate>
+      <div style="display:none">
+        <input name="type" ng-model="$parent.comment.type" type="text" ng-init="$parent.comment.type='backing'">
+      </div>
+      <div class="form-group" ng-class="{'text-error':commentForm.title.$invalid && commentSubmitted}">
+        <label>Summary</label>
+          <div class="error-message" ng-show="commentForm.title.$invalid && $parent.commentSubmitted">
+            Please enter a brief summary of how you are backing this project
+          </div>
+        <input class="input-block-level form-control" maxlength=75 name="title" ng-model="$parent.comment.title" placeholder="Give a brief summary of how you are backing this project... (maximum 75 characters)" required type="text">
+      </div>
+      <div class="form-group">
+        <label>Full details</label>
+        <textarea class="vote-comment" maxlength=2000 name="comment.body" ng-model="$parent.comment.body" placeholder="Give full details of how you are backing this project... (maximum 2000 characters)" rows="4"></textarea>
+      </div>
+      <div class="form-group" ng-class="{'text-error':commentForm.classification.$invalid && commentSubmitted}">
+        <label>Protective marking</label>
+        <protective-marking header="true" type="full"></protective-marking>
+        <div class="error-message" ng-show="commentForm.classification.$invalid && commentSubmitted">Please
+          select a classification</div>
+        <select class="form-control selectpicker classification-select" name="classification" ng-change="updateCommentPM()" ng-model="$parent.selectCommentClassification" ng-options="x.value as x.text for x in pm.classifications.list" required>
+          <option value="">Select a classification...</option>
+        </select>
+        <button class="btn btn-link collapsed" data-target="#pm-options" data-toggle="collapse" type="button">
+          <small>
+            <span class="closed">show more options
+              <i class="icon-chevron-down"></i>
+            </span>
+            <span class="opened">&nbsp;show less options
+              <i class="icon-chevron-up"></i>
+            </span>
+          </small>
+        </button>
+      </div>
+      <div class="collapse" id="pm-options">
+        <div class="sidebyside">
+          <label>Codewords
+            <small class="muted">(hold CTRL to select multiple)</small></label>
+          <select class="form-control codewords-select" multiple name="codewords" ng-change="updateCommentPM()" ng-model="comment.protective_marking.codewords" ng-options="x for x in pm.codewords.list">
+            <option value="">None</option>
+          </select>
+        </div>
+        <div class="sidebyside">
+          <label>Descriptor</label>
+          <select class="form-control" name="descriptor" ng-change="updateCommentPM()" ng-model="comment.protective_marking.descriptor" ng-options="x for x in pm.descriptors.list">
+            <option value="">Nothing selected</option>
+          </select>
+        </div>
+        <div class="sidebyside">
+          <label>National Caveats</label>
+          <div class="form-group">
+            <select class="form-control" name="national_caveats" ng-change="updateCommentPM()" ng-model="comment.protective_marking.national_caveats_primary_name" ng-options="x for x in pm.national_caveats.list">
+              <option value="">Nothing selected</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-success btn-small" ng-click="$parent.okModal(commentForm.$valid)" type="button">
+      <i class="icon-ok icon-white"></i>
+      Back this project </button>
+  </div>
+</div>

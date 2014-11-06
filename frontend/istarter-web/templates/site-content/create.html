@@ -1,0 +1,107 @@
+<div class="container">
+  <form name="contentForm" ng-submit="submitContent(contentForm.$valid, 'published')" novalidate>
+    <!-- novalidate prevents any HTML5 validation -->
+    <div class="row">
+      <div class="span12">
+        <div class="well">
+          <h4 ng-show="mode === 'create'"><i class="icon-large icon-pencil"></i> Add new content <span>({{content.label}})</span></h4>
+          <h4 ng-show="mode === 'edit' && content.status === 'draft'" class="draft"><i class="icon icon-pencil"></i> <span>DRAFT : </span> Edit content ({{content.label}})</h4>
+          <h4 ng-show="mode === 'edit' && content.status !== 'draft'"><i class="icon icon-pencil"></i> Edit content ({{content.label}})</h4>
+          <div class="status form-inline" ng-class="{'new-unsaved' : content.status === 'new unsaved','draft' : content.status === 'draft','deleted' : content.status === 'deleted', 'hidden-doc' : content.status === 'hidden'}"><label>Status </label>&nbsp;&nbsp;<span><small> {{content.status | uppercase}}</small></span></div>
+          
+          <div class="form-inline chkbox"><input type="checkbox" ng-model="content.index" id="contentIndex"> <label for="contentIndex"> Index page</label> </br> </div>
+       
+          <div class="form-group" ng-class="{'text-error':contentForm.title.$invalid && content.submitted}">
+            <label>Content title</label>
+            <div ng-show="contentForm.title.$invalid && content.submitted" class="error-message">Please enter a title for your content</div>
+            <input class="form-control input-xlarge" name="title" ng-model="content.title" placeholder="Give a brief content title" required type="text" maxlength=70>
+          </div>
+          
+          <div class="form-group" ng-class="{'text-error':contentForm.summary.$invalid && content.submitted}">
+            <label>Content summary</label>
+            <div ng-show="contentForm.summary.$invalid && content.submitted" class="error-message">Please enter a brief summary for your content</div>
+            <input class="input-block-level form-control" name="summary" ng-model="content.summary" placeholder="Give a brief content summary" required type="text" maxlength=140>  
+          </div>
+          
+          <div class="form-group description" ng-class="{'text-error':contentForm.body.$invalid && content.submitted}">
+            <label>Content body</label>
+            <div ng-show="contentForm.body.$invalid && content.submitted" class="error-message">Please enter some content</div>
+            <div text-angular name="body" ng-model="content.body" ng-required=true></div>
+          </div>
+
+        </div>
+        
+          <div class="well">        
+          <div class="form-group" ng-class="{'text-error':contentForm.classification.$invalid && content.submitted}">
+
+            <label>Protective marking &nbsp;&nbsp;<protective-marking type="full"></protective-marking></label>
+            
+            <div ng-show="contentForm.classification.$invalid && content.submitted" class="error-message">Please select a classification</div>
+            <select class="form-control classification-select" name="classification" ng-model="selectClassification" ng-options="x.value as x.text for x in pm.classifications.list" ng-change="updatePM()" required>
+              <option value="">-- Select a classification --</option>
+            </select>
+            <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#pm-options">
+              <small>
+                <span class="closed">show more options <i class="icon-chevron-down"></i></span>
+                <span class="opened">&nbsp;show less options <i class="icon-chevron-up"></i></span>
+              </small>
+            </button>
+
+          </div>
+
+          <div id="pm-options" class="collapse">
+
+          <div class="sidebyside">
+            <label>Codewords <small class="muted">(hold CTRL to select multiple)</small></label>
+            <select class="form-control codewords-select" name="codewords" ng-model="content.protective_marking.codewords" ng-options="x for x in pm.codewords.list" ng-change="updatePM()" multiple>
+              <option value="">None</option>
+            </select>
+          </div>  
+          <div class="sidebyside">
+            <label>Descriptor</label>
+            <select class="form-control" name="descriptor" ng-model="content.protective_marking.descriptor" ng-options="x for x in pm.descriptors.list" ng-change="updatePM()">
+              <option value="">Nothing selected</option>
+            </select>
+         </div>
+         <div class="sidebyside">
+            <label>National Caveats</label>
+            <div class="form-group">
+              <select class="form-control" name="national_caveats" ng-model="content.protective_marking.national_caveats_primary_name" ng-options="x for x in pm.national_caveats.list" ng-change="updatePM()">
+                <option value="">Nothing selected</option>
+              </select>
+            </div>
+          </div>
+
+          </div>
+          </div>
+  
+        <div class="form-buttons">
+
+          <span >
+            <button class="btn btn-small btn-warning push-right" type="button" ng-click="submitContent(contentForm.$valid, 'draft')" ng-disabled="contentForm.$invalid && content.submitted" ng-show="mode === 'create' && (content.status === 'draft' || content.status === 'new unsaved')"><i class="icon-file icon-white"></i> Save as draft </button>
+            <button class="btn btn-small btn-success push-right" type="submit" ng-disabled="contentForm.$invalid && content.submitted" ng-show="mode === 'create' && (content.status === 'draft' || content.status === 'new unsaved')"><i class="icon-ok icon-white"></i> Submit </button>
+                      
+            <button class="btn btn-small btn-warning push-right" type="button" ng-click="saveContent(contentForm.$valid, 'draft')" ng-disabled="contentForm.$invalid && content.submitted" ng-show="mode === 'edit' && content.status === 'draft'"><i class="icon-file icon-white"></i> Save as draft</button>
+            <button class="btn btn-small btn-success push-right" type="button" ng-click="saveContent(contentForm.$valid, 'published')" ng-disabled="contentForm.$invalid && content.submitted" ng-show="mode === 'edit' && content.status === 'draft'"><i class="icon-ok icon-white"></i> Submit </button>
+            <button class="btn btn-small btn-info push-right" type="button" ng-click="saveContent(contentForm.$valid, 'published')" ng-disabled="contentForm.$invalid && content.submitted" ng-show="mode === 'edit' && content.status === 'published'"><i class="icon-ok icon-white"></i> Submit changes </button>
+          </span>
+          <button class="btn btn-small btn-primary push-right" type="button" ng-click="cancelContent()"><i class="icon-remove icon-white"></i> Cancel </button>
+        </div>
+      </div>
+      <div class="dev-comment">{{content}}</div>
+
+      </div>
+      
+    </div>
+  </form>
+</div>
+
+  <div class="popup-alert invalid-contenttype alert alert-danger">
+    <button class="btn btn-danger btn-close btn-mini pull-right" ng-click="closePopupAlert();;openPreviousViewUrl()" title="Cancel" type="button">
+      <i class="icon-remove icon-white"></i>
+    </button>
+    <h4><i class="icon icon-trash"></i> Invalid Content Type</h4>
+    <br />
+    <p>Invalid content type specified. Can not create content.</p><br />
+    <button class="btn btn-danger pull-right" ng-click="closePopupAlert();openPreviousViewUrl()" title="Cancel" >  Ok  </button>
+  </div>

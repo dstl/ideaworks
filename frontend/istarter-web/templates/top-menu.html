@@ -1,0 +1,132 @@
+<!-- Top navigation bar -->
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- nav bar collapsed menu - displays when screen too narrow to display full nav bar -->
+            <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+            <!-- Nav Title -->
+            <a class="brand" href="#"><i class="icon-large icon-lightbulb"></i><div><span class="logo1">i</span><span class="logo2">deaWorks</span><span class="logo1">!</span></div></a>
+            <!-- nav -->
+            <div class="nav-collapse collapse">
+              <!-- Left Navigation bar links -->
+              <ul class="nav navbar-nav navbar-left pull-left">
+                
+                <!-- IDEAS Dropdown Menu -->
+                <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-help"></i> Ideas <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <!-- All ideas views -->
+                    <li class="nav-header">View ideas</li>
+                    <li ng-class="{'active': currentView ==='view-latest-published'}"><a ng-href="#/ideas/view-latest/summary" >Latest ideas </a></li>
+                    <li ng-class="{'active': currentView ==='view-popular-published'}"><a ng-href="#/ideas/view-popular/summary" >Most popular ideas </a></li>
+                    <li ng-class="{'active': currentView ==='view-all-published'}"><a ng-href="#/ideas/view-all/summary">All ideas </a></li>
+                    
+                    <!-- My ideas views -->
+                    <li class="divider" ng-show="(user.ideasCount + user.draftIdeasCount) > 0"></li>
+                    <li class="nav-header" ng-show="user.ideasCount > 0">View my Ideas</li>
+                    <li ng-class="{'active': currentView ==='view-my-all'}" ng-show="(user.ideasCount + user.draftIdeasCount) > 0"><a ng-href="#/ideas/view-my/summary/?user={{user.id()}}&status__in=published,draft&limit=0">All my ideas ({{user.ideasCount + user.draftIdeasCount}})</a></li>
+                    <li ng-class="{'active': currentView ==='view-my-published'}" ng-show="(user.ideasCount) > 0"><a ng-href="#/ideas/view-my/summary/?user={{user.id()}}&status=published&limit=0">My published ideas ({{user.ideasCount}})</a></li>
+                    <li ng-class="{'active': currentView ==='view-my-draft'}" ng-show="user.draftIdeasCount > 0"><a ng-href="#/ideas/view-my/summary/?user={{user.id()}}&status=draft&limit=0">My draft ideas ({{user.draftIdeasCount}})</a></li>
+                    
+                    <!-- actions -->
+                    <li class="divider"></li>
+                    <li ng-class="{'disabled':user.name() === 'Anonymous'}"><a ng-href="" ng-click="createIdea(user)" >Add a new idea </a></li>
+                    <li><a ng-href="" ng-click="refresh('page')" ><i class="icon-refresh"></i> Refresh page </a></li>
+                  </ul>
+                </li>
+                
+                <!-- PROJECTS Dropdown Menu -->
+                <li class="dropdown" ng-show="true"><!-- hide for now -->
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-help"></i> Projects <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <!-- All project views -->
+                    <li class="nav-header">View projects</li>
+                    <li ng-class="{'active': currentView ==='view-latest-published'}"><a ng-href="#/projects/view-latest/summary" >Latest projects </a></li>
+                    <li ng-class="{'active': currentView ==='view-popular-published'}"><a ng-href="#/projects/view-popular/summary" >Most backed projects </a></li>
+                    <li ng-class="{'active': currentView ==='view-all-published'}"><a ng-href="#/projects/view-all/summary">All projects </a></li>
+                    
+                    <!-- My project views -->
+                    <li class="divider" ng-show="(user.projectsCount + user.draftProjectsCount) > 0"></li>
+                    <li class="nav-header" ng-show="user.projectsCount > 0">View my Projects</li>
+                    <li ng-class="{'active': currentView ==='view-my-all'}" ng-show="(user.projectsCount + user.draftProjectsCount) > 0"><a ng-href="#/projects/view-my/summary/?user={{user.id()}}&status__in=published,draft&limit=0">All my projects ({{user.projectsCount + user.draftProjectsCount}})</a></li>
+                    <li ng-class="{'active': currentView ==='view-my-published'}" ng-show="(user.projectsCount) > 0"><a ng-href="#/projects/view-my/summary/?user={{user.id()}}&status=published&limit=0">My published projects ({{user.projectsCount}})</a></li>
+                    <li ng-class="{'active': currentView ==='view-my-draft'}" ng-show="user.draftProjectsCount > 0"><a ng-href="#/projects/view-my/summary/?user={{user.id()}}&status=draft&limit=0">My draft projects ({{user.draftProjectsCount}})</a></li>
+                    
+                    <!-- actions -->
+                    <li class="divider"></li>
+                    <li ng-class="{'disabled':user.name() === 'Anonymous'}"><a ng-href="" ng-click="createProject(user)" >Add a new project </a></li>
+                  </ul>
+                </li>
+                
+                </ul>
+
+         
+              <!-- right hand side of nav -->
+              <ul class="nav navbar-nav navbar-right pull-right">
+                
+                <!-- ADMIN  Dropdown Menu -->
+                <li class="dropdown" ng-show="user.isAdmin">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-help"></i> Admin <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a ng-href="admin/">Site Admin</a></li>
+                    <li class="divider"></li>
+                    <li class="nav-header">Manage </li>
+                    <li><a ng-href="#/ideas/view-all/summary/?&status=deleted&limit=0">Deleted ideas </a></li>
+                    <li><a ng-href="#/ideas/view-all/summary/?&status=hidden&limit=0">Hidden ideas </a></li>
+                    <li class="divider"></li>
+                    <li class="nav-header">Site content </li>
+                    <li><a ng-href="#/content/view/?type=all">View all</a></li>
+                    <li class="dropdown-submenu" ng-repeat="sct in siteContentTypes"><a tabindex="-1" href="#">{{sct.navtext}}</a>
+                    <ul class="dropdown-menu">
+                    <li><a ng-href="#/content/view/?type={{sct.key}}">View</a></li>
+                    <li><a ng-href="#/content/create/{{sct.key}}">Create</a></li>                    
+                    </ul>
+                    </li>
+                  </ul>
+                </li>
+                <!-- FEEDBACK Dropdown Menu -->
+                <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-retweet"></i> Feedback <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li class="nav-header">View feedback</li>
+                    <li><a ng-href="#/feedback/view-all/?limit=0">All feedback</a></li>
+                    <li ng-show="user.name() !== 'Anonymous'" ng-class="{'active': currentView ==='view-my-all'}"><a ng-href="#/feedback/view-my/?user={{user.id()}}&status=all&limit=0">My feedback</a></li>
+                    <li class="divider" ng-show="user.name() !== 'Anonymous'"></li>
+                    
+                    <li ng-show="user.name() !== 'Anonymous'"><a ng-href="#/feedback/create">Submit feedback</a></li>
+                  </ul>
+                </li>    
+                <!-- HELP Dropdown Menu -->
+                <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-question-sign"></i> Help <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a ng-href="#/docs/about">About IdeaWorks</a></li>
+                    <li><a ng-href="#/docs/description-of-service">About Prototypes</a></li>
+                  </ul>
+                </li>
+                <!-- USER Dropdown Menu -->
+                <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user"></i> {{user.name()}}
+                    <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li ng-show="user.name() ==='Anonymous'"><a ng-href="" ng-click="user.login()">Log in</a></li>
+                    <li ng-show="user.name() ==='Anonymous'"><a ng-href="" ng-click="user.register()">Register</a></li>
+                    <li ng-show="user.name() !=='Anonymous'"><a ng-href="" ng-click="user.logout()">Logout</a></li>
+                    <li ng-show="user.name() !=='Anonymous'"><a ng-href="" ng-click="user.changePassword()">Change password</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div><!--/ nav -->
+          </div>
+        </div>
+      </div><!-- /top navigation bar -->

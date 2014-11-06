@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<!-- (c) Crown Copyright 2014 Defence Science and Technology Laboratory UK 
+# Author: Rich Brantingham  -->
+
+<!-- ##SWv2 this version specific to SW v2 -->
+
+<!--[if lt IE 7]>  <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<html lang="en">
+  <head>
+  
+  	{% load staticfiles %}
+  	
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title_extra %} {% endblock %}</title>
+
+    <link href="{% static "auth_addin_app/css/normalize.css" %}" rel="stylesheet" >
+    <link href="{% static "auth_addin_app/css/global.css" %}" rel="stylesheet"/>
+    <link href="{% static "auth_addin_app/css/smoothness/jquery-ui-1.9.2.min.css" %}" rel="stylesheet"/>
+
+    <!-- Scripts -->
+    <script src="{% static "auth_addin_app/js/modernizr-2.6.2.min.js" %}" type="text/javascript"></script>
+  </head>
+
+  <body>
+  {% block main_block %}{% endblock main_block %}
+  
+    <!--  Scripts -->
+    <script src="{% static "auth_addin_app/js/jquery-1.10.2.min.js"%}" type="text/javascript"></script>
+    <script src="{% static "auth_addin_app/js/jquery-ui-1.9.2.min.js"%}" type="text/javascript"></script>
+    <script src="{% static "auth_addin_app/js/jquery.cookie.js"%}" type="text/javascript"></script>
+    <!-- for native JSON support in IE6 and IE7 -->
+    <script src="{% static "auth_addin_app/js/jquery.json.min.js"%}" type="text/javascript"></script>
+    {% block extra_js %}{% endblock %}
+
+  </body>
+</html>
