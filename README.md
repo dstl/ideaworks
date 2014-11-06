@@ -1,19 +1,25 @@
 (c) Crown Copyright 2011 Defence Science and Technology Laboratory UK
 Author: Rich Brantingham
 
-# Ideaworks (formerly known as ideaworks)
+# Ideaworks
 
-Ideaworks is a free and open source web application that allows a group of people to collate, comment on and rate ideas. There is also a fork that
-allows staff users to create projects, small packages of work that have developed from the ideas. These main forks require access to an SMTP
-server for the user registration/activation process. However, we've also created forks of these 2 repos that do not require SMTP access at all.
+Ideaworks is a free and open source web application that allows a group of people to collate, comment on and rate ideas. The application also has
+allows staff users to create projects, small packages of work that have developed from the ideas. 
 
-It was initially designed and built by the UK Defence Science & Technology Laboratory (dstl) and released under an Open Government License (v2)
-as a prototype tool for collating user ideas. Please use it as you see fit, file bug and enhancement issues and we very much welcome pull requests.
+It was initially designed and built by the UK Defence Science & Technology Laboratory (dstl) and released under AGPL as a prototype tool. Ideaworks is the first piece of software to be released onto Github because of its simplicity, low risk and potential benefit to the Free and Open Source software community - particularly those organising hackathons. 
+
+We don’t pretend that the code is the best ever written (see NOTICE.md and LICENSE.md for the disclaimers), but please use it as you see fit, file bugs and enhancement issues (of which we’ll be adding a few outstanding). We very much welcome pull requests. 
 
 The application is split into 2 parts:
 
 1. A django project which provides the data API back-end and user authentication.
 2. A responsive design html/js/css front-end. 
+
+## Installation
+
+The rest of this document outlines how to get it up and running. We’ve attempted to document it as best as possible, but it can be a bit of a pain, so we’re in the process of writing Ansible scripts to automate deployment on Ubuntu and CentOS. That will likely be published under a separate repo that links back to this as a submodule.
+
+
 
 ## Authentication
 
