@@ -14,21 +14,26 @@ The application is split into 2 parts:
 1. A django project which provides the data API back-end and user authentication.
 2. A responsive design html/js/css front-end. 
 
-# Screenshots.
+# Installation
+
+An installation guide is provided in this repo (INSTALL.md). We're also working on an Ansible script for deployment, which should be linked from this repo shortly. If you're interested in deploying an instance of ideaworks and the Ansible script isn't out yet, please get in touch.
+
+
+# Screenshots
 
 This instance is called iStarter - the name and logo is configurable to suit your use case.
 
-### Create an idea
+#### Create an idea
 ![Ideas in Ideaworks](/readme_images/create_an_idea.png?raw=true "Create An Ideas")
 
-### A summary view of all the ideas 
+#### A summary view of all the ideas 
 
 ![Ideas in Ideaworks](/readme_images/view_ideas_summary.png?raw=true "View Idea Summary")
 
-### View an idea - see the detail full list of comments 
+#### View an idea - see the detail full list of comments 
 
 ![Ideas in Ideaworks](/readme_images/view_an_idea_details.png?raw=true "View an Idea")
 
-### Comment on an idea to stimulate some discussion 
+#### Comment on an idea to stimulate some discussion 
 
 ![Ideas in Ideaworks](/readme_images/add_a_comment.png?raw=true "Add a Comment")
