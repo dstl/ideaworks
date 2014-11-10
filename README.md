@@ -16,4 +16,7 @@ The application is split into 2 parts:
 
 # Here's what the application looks like. This instance is called iStarter - the name and logo is configurable to suit your use case.
 
-![Ideas in Ideaworks](/readme_images/ideas.jpg?raw=true "Ideas")
+![Ideas in Ideaworks](/readme_images/create_an_idea.png?raw=true "Create An Ideas")
+![Ideas in Ideaworks](/readme_images/view_an_idea_details.png?raw=true "View an Idea")
+![Ideas in Ideaworks](/readme_images/view_ideas_summary.png?raw=true "View Idea Summary")
+![Ideas in Ideaworks](/readme_images/add_a_comment.png?raw=true "Add a Comment")
