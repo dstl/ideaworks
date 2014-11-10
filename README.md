@@ -14,9 +14,21 @@ The application is split into 2 parts:
 1. A django project which provides the data API back-end and user authentication.
 2. A responsive design html/js/css front-end. 
 
-# Here's what the application looks like. This instance is called iStarter - the name and logo is configurable to suit your use case.
+# Screenshots.
 
+This instance is called iStarter - the name and logo is configurable to suit your use case.
+
+### Create an idea
 ![Ideas in Ideaworks](/readme_images/create_an_idea.png?raw=true "Create An Ideas")
-![Ideas in Ideaworks](/readme_images/view_an_idea_details.png?raw=true "View an Idea")
+
+### A summary view of all the ideas 
+
 ![Ideas in Ideaworks](/readme_images/view_ideas_summary.png?raw=true "View Idea Summary")
+
+### View an idea - see the detail full list of comments 
+
+![Ideas in Ideaworks](/readme_images/view_an_idea_details.png?raw=true "View an Idea")
+
+### Comment on an idea to stimulate some discussion 
+
 ![Ideas in Ideaworks](/readme_images/add_a_comment.png?raw=true "Add a Comment")
