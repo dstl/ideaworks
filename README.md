@@ -2,7 +2,7 @@
 
 # Ideaworks
 
-Ideaworks is a free and open source web application that allows a group of people to collate, comment on and rate ideas. The application also has
+Ideaworks is a free and open source web application that allows a group of people to collate, comment on and rate ideas. The application also
 allows staff users to create projects, small packages of work that have developed from the ideas. 
 
 It was initially designed and built by the UK Defence Science & Technology Laboratory (dstl) and released under AGPL as a prototype tool. Ideaworks was the first piece of software to be released onto Github because of its simplicity, low risk and potential benefit to the Free and Open Source software community - particularly those organising hackathons.
