@@ -7,8 +7,7 @@ The rest of this document outlines how to get it up and running. We’ve attempt
 
 ## Authentication
 
-Two forks to the original code handle the different authentication setups. The primary ideaworks repo is setup to work with an SMTP server and requires
-an email-based account activation step. The ideaworks-no-email fork does not require any SMTP connections; account activation is done automatically.
+The ideaworks repo is setup to work with an email server and requires an email-based account activation step.
 
 Calls to the API are authenticated using a username and API key. The content is read-only for anonymous users. All other http request types/verbs require 
 an active API key and username. 
@@ -116,9 +115,13 @@ This setup has some benefits (content and auth are stored separately) and some d
 
 ## Email
 
-Depending which fork you use, you might need access to an SMTP server. You'll need to know your credentials during the installation/configuration
-process too so that they're available to Django's mail sending libraries. These settings will need to be provided in a file called email_settings.py
-which gets stored alongside the main django project settings file (it gets pulled in by auth_settings - see that file for more info).
+You will need access to provide your instance with email settings so that it can send emails to users (for registration and password reset).
+They will need to be stored in a file called email_settings.py which gets used by Django's mail sending libraries. 
+The email_settings.py will need to be stored alongside the main django project settings file (it gets pulled in by auth_settings - see that file for more info).
+I've added a placeholder file to illustrate where the file needs to be and what it needs to contain.
+There is a line in the .gitignore that stops email_settings.* getting pulled up into the public repo. The placeholder does not get caught by this line.
+
+If you cannot provide details for an email server, then you will have to create accounts manually via the django admin interface (`/ideaworks_api/admin/`)
 
 
 # Installation
@@ -277,10 +280,6 @@ Suggest changing this as this is a public repository
 More info found here: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 Thanks to @nealtodd for the catch.
 
-### Email
-
-If you're **NOT** using the *ideaworks-no-email* branch, then this application will expect to be able to connect to an SMTP server. You'll need to provide a file in src/ideaworks/ideaworks/ called email_settings.py
-in which you should drop your SMTP settings. Examples of the SMTP settings required are provided in the src/ideaworks/ideaworks/auth_settings.py file.
 
 ### Setup the Auth DB (Sqlite or pg)
 
