@@ -17,6 +17,8 @@
   <form id="registration" class="form-auth" action="" method="POST">{% csrf_token %}
     <h2 class="form-auth-heading">Sign up</h2>
 
+	  {% include "registration/use_email_instruction.html" %}
+
       {% if form.errors %}
         <p class="errorlist">Please take a look at the errors and try again.</p>
       {% endif %}
