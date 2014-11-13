@@ -85,6 +85,9 @@ REGISTRATION_OPEN = True
 # Anonymous viewing?
 ANONYMOUS_VIEWING = True
 
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = 'ytqsffdhs2v*4y)+t$p*2g_#+)rgh*si1eq0qnt1wr%afx$r^z'
+
 LOGIN_URL = '%s/accounts/login'%(APPLICATION_NAME)
 
 # This is only ever needed in the event that the url passed as 'next' is not safe.
