@@ -111,14 +111,9 @@ class Test_Authentication_Base(test_runner.MongoEngineTestCase):
                                  'password1': 'test_password',  'password2': 'test_password',
                                  'tos': True})
         
-        # Get the profile of our new user to access the ACTIVATION key
-        profile = RegistrationProfile.objects.get(user__email=email)
+        # Now logout the user, so everything else is done on API key
+        resp = self.c.post(reverse('auth_logout'))
         
-        # And now activate the profile using the activation key
-        resp = self.client.get(reverse('registration_activate',
-                                       args=(),
-                                       kwargs={'activation_key': profile.activation_key}))
-
         # Give all other tests access to the user and API key
         user = User.objects.get(email=email)
         api_key = user.api_key.key
@@ -192,6 +187,7 @@ class Test_POST_Feedback(Test_Authentication_Base):
                "protective_marking" : self.pm}
         
         response = self.c.post(self.resourceListURI('feedback'), json.dumps(doc), content_type='application/json', **headers)
+        #print response.content
         self.assertEqual(response.status_code, 201)
 
     
@@ -975,7 +971,10 @@ class Test_GET_Comments_On_Private_Feedback(Test_Authentication_Base):
                        "protective_marking" : self.pm}
         
         comments_uri = self.resource_uri + 'comments/'
+        print '**'*20
+        #print comments_uri
         response = self.c.post(comments_uri, json.dumps(new_comment), content_type='application/json', **staff_headers)
+        print response.status_code
         
         self.assertEquals(response.status_code, 201)
         
@@ -1083,4 +1082,5 @@ class Test_GET_Feedback_Protective_Marking(Test_Authentication_Base):
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
+
     unittest.main()

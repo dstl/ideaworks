@@ -200,7 +200,7 @@ ideaworks.ngControllers.controller('appCtrl', ['$rootScope', '$scope', '$http', 
         $.removeCookie('csrftoken', {
           path : '/'
         });
-        $window.location.href = Config.appPath + '/accounts/logout/?next=' + $location.protocol() + '://' + $location.host() + Config.frontEndPath + '/%23/logged-out';
+        $window.location.href = Config.appPath + '/accounts/logout/?next=' + $location.protocol() + '://' + $location.host() + '/%23/logged-out';
       }
       
       // register user

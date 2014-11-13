@@ -284,6 +284,7 @@ class ProjectResource(BaseCorsResource, resources.MongoEngineResource):
         bundle.data['user'] = bundle.request.user.username
         
         # Sanitize tags before they get submitted
+
         try: bundle.data['tags'] = cleanup_tags(bundle.data['tags'])
         except: pass
         

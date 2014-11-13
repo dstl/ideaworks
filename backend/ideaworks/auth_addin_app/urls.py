@@ -3,6 +3,7 @@
 # Author: Rich Brantingham
 
 from django.conf.urls import patterns, include, url
+from django.views.generic.base import TemplateView
 
 # Access the model that defines what our registration profile will look like in the db
 from auth_addin_app.models import AuthCustomisedRegistrationView
@@ -11,7 +12,7 @@ from auth_addin_app.forms import RegistrationEmailAndFormTermsOfService
 # Form for email-based authentication
 from registration_email.forms import EmailAuthenticationForm
 # Remember me login form also from registration email
-from auth_addin_app.views import login_remember_me_apikey_response, logout
+from auth_addin_app.views import login_remember_me_apikey_response, logout, password_reset
 
 # Access the django project settings for a default URL
 from django.conf import settings
@@ -29,6 +30,10 @@ urlpatterns = patterns('',
         ),
         name='registration_register'),
 
+   url(r'^accounts/register/complete/$',
+       TemplateView.as_view(template_name='registration/registration_complete.html'),
+       name='registration_complete'),
+    
     # Overriding Login so that we can put user id and API key into the response
     url(
         r'^accounts/login/$',
@@ -46,11 +51,12 @@ urlpatterns = patterns('',
         name='auth_logout',
     ),
 
-    # What to do on successful activation - email link having been clicked
-    url(r'^accounts/activation_complete/$', 'auth_addin_app.views.activation_success', name='activation_success'),
+    url(r'^accounts/password/reset/$',
+        password_reset,
+        name='auth_password_reset'),
 
     # Email-based auth
-    url(r'^accounts/', include('registration_email.backends.default.urls')),
+    url(r'^accounts/', include('registration_email.backends.simple.urls')),
 
     # Pointer to terms of service
     url(r'^tos/', 'auth_addin_app.views.terms_of_service', name='term_of_service'),

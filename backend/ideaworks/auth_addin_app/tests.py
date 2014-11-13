@@ -20,7 +20,6 @@ class CustomCookieTests(TestCase):
     the front-end then uses for user display and permissions (in combination with sessions).
     These tests ensure that setup works OK.
     """
-
     def setUp(self):
         """
         Basic setup for each test: creates a user with an API key
@@ -37,16 +36,9 @@ class CustomCookieTests(TestCase):
                                       'password1': 'test_password',
                                       'password2': 'test_password',
                                       'tos': True})
-        
-        profile = RegistrationProfile.objects.get(user__email='bob@example.com')
-        
-        # And now activate the profile using the activation key
-        resp = self.client.get(reverse('registration_activate',
-                                       args=(),
-                                       kwargs={'activation_key': profile.activation_key}))
+                
         self.user = User.objects.get(email='bob@example.com')
         self.api_key = self.user.api_key.key
-
         
     def tearDown(self):
         """

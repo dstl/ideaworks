@@ -5,7 +5,7 @@
 from django import forms
 
 # This set of imports and the class allows us to use the registration terms of service class
-from registration.backends.default.views import RegistrationView
+from registration.backends.simple.views import RegistrationView
 
 # For the signal
 from django.dispatch import receiver

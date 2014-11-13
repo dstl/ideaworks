@@ -3,25 +3,24 @@
 
 {% extends "base.html" %}
 {% load auth_tags %}
-{% block title_extra %} Registration Confirmation {% endblock %} 
+{% block title_extra %} Registration Complete {% endblock %} 
 
 {% block main_block %}
+
 <div class="form-container">
-	<div class="form-auth" >
-		<h2>
-			Got mail?
-		</h2>
-		<p>
-			We've sent you a confirmation email. 
-		</p>
-		<p>
-			Please check your email and confirm your account by clicking on the 'confirm' button.
-		</p>
-		<p>
-			If you don't receive an email from us, give it <strong>5 minutes</strong>, 
-			check your <strong>junk mail</strong> and if it's still not there then please get 
-			in <a href="mailto:{% admin_email %}">contact.</a>
-		</p>
-	</div>
+  <div class="form-auth" >
+    <h2>
+      Thank you!
+    </h2>
+    <p style="font-size:110%">
+      We've created an account for you. We strongly suggest your store your password in a secure place. 
+      You can now <a href="{% url "auth_login" %}">login</a>. 
+    </p>
+    <p style="font-size:110%">
+		If you have any difficulties logging in or you forget your password, please get 
+		in contact. Your administrator is <b>{% admin_name %}</b> and they
+		can be reached on either <b>{% admin_email %}</b> or <b>{% admin_phone %}</b>.
+    </p>
+  </div>
 </div>
 {% endblock %}

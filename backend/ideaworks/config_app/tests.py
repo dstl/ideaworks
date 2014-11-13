@@ -62,14 +62,8 @@ class Test_Authentication_Base(test_runner.MongoEngineTestCase):
                                  'password1': 'test_password',  'password2': 'test_password',
                                  'tos': True})
         
-        # Get the profile of our new user to access the ACTIVATION key
-        profile = RegistrationProfile.objects.get(user__email=email)
+        resp = self.c.post(reverse('auth_logout'))
         
-        # And now activate the profile using the activation key
-        resp = self.client.get(reverse('registration_activate',
-                                       args=(),
-                                       kwargs={'activation_key': profile.activation_key}))
-
         # Give all other tests access to the user and API key
         user = User.objects.get(email=email)
         api_key = user.api_key.key

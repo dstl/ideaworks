@@ -24,7 +24,7 @@ import sys
 
 # You can key the configurations off of anything - I use project path.
 configs = {
-    '/Users/robrant/eclipseCode/ideaworks/backend/ideaworks' : 'dev_rb',
+    '/path/to/ideaworks/backend/ideaworks/'  : 'dev_rb',
     }
 
 # Ensure all keys are lower case to ensure mis-match isn't due to case sensitivity
