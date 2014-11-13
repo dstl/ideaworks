@@ -271,6 +271,13 @@ Check your paths. When it does the lookup, it is not case sensitive.
         $> ll ideaworks
         lrwxrwxrwx. 1 root   root         20 Jun 12 05:09 ideaworks -> /opt/ideaworks/logs/
 
+### SECRET_KEY
+
+SECRET_KEY resides in your local config file (if you used the existing template).
+Suggest changing this as this is a public repository
+More info found here: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
+Thanks to @nealtodd for the catch.
+
 ### Email
 
 If you're **NOT** using the *ideaworks-no-email* branch, then this application will expect to be able to connect to an SMTP server. You'll need to provide a file in src/ideaworks/ideaworks/ called email_settings.py
