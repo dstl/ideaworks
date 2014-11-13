@@ -67,19 +67,18 @@ Then, on your deployment network, you can run:
 
 where <DIR> is a directory you'll use to store each of the .gz/.zip/.tar dependency packages.
 I've added a directory called /dependencies_cache which I use for this dependency caching.
-<PATH_TO> is the path to the requirements.txt file in this proejct. 
+<PATH_TO> is the path to the requirements.txt file in this project. 
 
-Probably worth checking that all of the dependencies have downloaded before transferring over.
-
-
-Django tastytools proved a bit more problematic to install, so check before you move on that it defintely installed:
+Django tastytools proved a bit more problematic to install directly from `pip install -r requirements` so check before you move on that it is definitely installed:
 
     $> pip freeze
 
-If not, then navigate to the source you've downloaded and run:
-    
-    $> pip install django-tastytools-master/ #Note the slash so that it's definitely pointing at the directory
+If doing it in 2 stages, it should work fine - navigate to the source you've downloaded and run:
 
+	$> git clone https://github.com/juanique/django-tastytools.git
+	$> sudo pip install django-tastytools/
+
+Thanks to @stuartmarsden for highlighting.
 
 ## Front-end HTML, JavaScript, CSS, images and fonts
 
