@@ -7,7 +7,8 @@ The rest of this document outlines how to get it up and running. We’ve attempt
 
 ## Authentication
 
-The ideaworks repo is setup to work with an email server and requires an email-based account activation step.
+User accounts can be created by users without email-based account activation. This branch does not require any email server credentials to run. Use this branch 
+if you are working on a network without access to email (sounds nice).
 
 Calls to the API are authenticated using a username and API key. The content is read-only for anonymous users. All other http request types/verbs require 
 an active API key and username. 
@@ -110,18 +111,6 @@ You obviously don't have to use a local instance of mongo - there are commented 
 
 **Sqlite3** or **postgres** is used for the authentication backend because of the ease of integrating SQL dbs with Django.
 This setup has some benefits (content and auth are stored separately) and some draw-backs (content and auth are stored separately!). :)
-
-
-
-## Email
-
-You will need access to provide your instance with email settings so that it can send emails to users (for registration and password reset).
-They will need to be stored in a file called email_settings.py which gets used by Django's mail sending libraries. 
-The email_settings.py will need to be stored alongside the main django project settings file (it gets pulled in by auth_settings - see that file for more info).
-I've added a placeholder file to illustrate where the file needs to be and what it needs to contain.
-There is a line in the .gitignore that stops email_settings.* getting pulled up into the public repo. The placeholder does not get caught by this line.
-
-If you cannot provide details for an email server, then you will have to create accounts manually via the django admin interface (`/ideaworks_api/admin/`)
 
 
 # Installation
