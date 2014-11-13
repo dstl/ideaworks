@@ -8,7 +8,7 @@
 docutils==0.11
 biplist==0.6
 defusedxml==0.4.1
-Django==1.5.1
+Django==1.5.11
 six==1.5.2
 wsgiref==0.1.2
 python-dateutil==2.2
