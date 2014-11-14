@@ -204,10 +204,26 @@ def password_reset(request, template_name='registration/password_reset_info.html
     Provides user with information about how to get their password reset.
     """
     
+    # Retrieve the admin details from settings
+    try: admin_name = settings.ADMINS[0][0]
+    except: admin_name = None
+    try: admin_email = settings.ADMINS[0][1]
+    except: admin_email = None
+    try: admin_phone = settings.ADMINS[0][2]
+    except: admin_phone = None
+    try: admin_url = settings.ADMINS[0][3]
+    except: admin_url = None
+        
+    
     current_site = get_current_site(request)
     context = {
         'site': current_site,
         'site_name': current_site.name,
+        'admin_name':  admin_name,
+        'admin_email': admin_email,
+        'admin_phone': admin_phone,
+        'admin_url' :  admin_url,
+        
         'title': _('Password Reset Information')
     }
     

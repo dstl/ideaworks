@@ -26,7 +26,12 @@ ALLOWED_HOSTS = ['localhost',]
 # the default folder within this projects structure. For example:
 #LOG_PATH = '/var/log/'
 
-ADMINS   = (('<admin name>', '<admin email>', '<admin phone>'),)
+# These appear on this page: http://localhost:8000/accounts/password/reset/
+# Please provide 1 of these for your users otherwise they have no way of resetting passwords
+ADMINS   = ((None,    # String, representing the admin's name
+             None,    # String, representing the admin's email address
+             None,    # String, representing the admin's phone number
+             None),)  # String, representing a helpdesk URL
 MANAGERS = ADMINS
 
 CONFIG_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -125,7 +130,8 @@ API_SETTINGS = {'application_name'            : APPLICATION_NAME,
                 'show_latest_project_count'   : SHOW_LATEST_PROJECTS_COUNT,
                 'admin_name'                  : ADMINS[0][0],
                 'admin_email'                 : ADMINS[0][1],
-                'admin_phone'                 : ADMINS[0][2]}
+                'admin_phone'                 : ADMINS[0][2],
+                'admin_url'                   : ADMINS[0][3]}
 
 ''' IF YOU MODIFY THIS DICT, YOU WILL ALSO NEED TO MODIFY THE FIELDS IN config_app.api.ConfigResource
     FOR THE CONTENT TO BE AVAILABLE IN THE API '''
