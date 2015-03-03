@@ -7,7 +7,7 @@ allows staff users to create projects, small packages of work that have develope
 
 It was initially designed and built by the UK Defence Science & Technology Laboratory (dstl) and released under AGPL as a prototype tool. Ideaworks was the first piece of software to be released onto Github because of its simplicity, low risk and potential benefit to the Free and Open Source software community - particularly those organising hackathons.
 
-We don’t pretend that the code is the best ever written (see NOTICE.md and LICENSE.md for the disclaimers), but please use it as you see fit, file bugs and enhancement issues (of which we’ll be adding a few outstanding). We very much welcome pull requests. 
+We don’t pretend that the code is the best ever written (see [NOTICE.md](NOTICE.md) and [LICENSE.txt](LICENSE.txt) for the disclaimers), but please use it as you see fit, file bugs and enhancement issues (of which we’ll be adding a few outstanding). We very much welcome pull requests. 
 
 The application is split into 2 parts:
 
@@ -16,7 +16,7 @@ The application is split into 2 parts:
 
 # Installation
 
-An installation guide is provided in this repo (INSTALL.md). We're also working on an Ansible script for deployment, which should be linked from this repo shortly. If you're interested in deploying an instance of ideaworks and the Ansible script isn't out yet, please get in touch.
+An installation guide is provided in this repo ([INSTALL.md](INSTALL.md)). We're also working on an Ansible script for deployment, which should be linked from this repo shortly. If you're interested in deploying an instance of ideaworks and the Ansible script isn't out yet, please get in touch.
 
 
 # Screenshots
